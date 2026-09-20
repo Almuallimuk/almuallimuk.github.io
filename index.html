@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Online Quran Academy UK | Tajweed, Hifz &amp; Qaida — Almuallim</title>
-  <meta name="description" content="Almuallim is a UK online Quran academy offering 1:1 Tajweed, Hifz, Noorani Qaida &amp; Tafseer classes. Qualified teachers, UK-time scheduling. Book a free trial.">
+  <meta name="description" content="Almuallim is a UK online Quran academy offering 1:1 Tajweed, Hifz &amp; Qaida classes with qualified teachers, UK-time scheduling. Book a free trial today.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Almuallim Online Quran Academy">
   <meta name="theme-color" content="#0A2A1F">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Almuallim">
   <meta property="og:title" content="Online Quran Academy UK | Tajweed, Hifz &amp; Qaida — Almuallim">
-  <meta property="og:description" content="1:1 online Quran classes for UK students in London, Birmingham, Manchester, Leeds, Glasgow &amp; beyond. Qualified teachers, UK-time scheduling, free trial class.">
+  <meta property="og:description" content="1:1 online Quran classes for UK students in London, Birmingham, Manchester &amp; beyond. Qualified teachers, UK-time scheduling, free trial available.">
   <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="https://almuallim.uk/">
   <meta property="og:image" content="https://almuallim.uk/og-image.jpg">
@@ -227,6 +227,12 @@
     box-shadow:0 12px 24px rgba(10,42,31,0.12);
   }
 
+  .navlinks .navlinks-sub{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    opacity:0.85;
+  }
+
   .hamburger{
     display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px;
     width:40px; height:40px; background:none; border:1px solid var(--hairline); border-radius:4px; cursor:pointer;
@@ -249,6 +255,7 @@
     }
     .navlinks a{padding:8px 12px; border-top:none; border-radius:4px;}
     .nav-cta{padding:12px 22px; font-size:0.9rem;}
+    .navlinks .navlinks-sub{display:none;}
   }
 
   /* ===== HERO ===== */
@@ -601,6 +608,8 @@
       <a href="#testimonials">Testimonials</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
+      <a href="/privacy-policy" class="navlinks-sub">Privacy Policy</a>
+      <a href="/terms-of-service" class="navlinks-sub">Terms of Service</a>
     </div>
   </nav>
 </header>
@@ -1046,7 +1055,6 @@
         <textarea id="msg" name="message" placeholder="Student's age, preferred timing, current level..."></textarea>
       </div>
 
-      <!-- ✅ CONSENT CHECKBOX (added) -->
       <div class="field consent-field">
         <label class="consent-label" for="consent">
           <input
@@ -1060,20 +1068,15 @@
           >
           <span>
             I have read and agree to the
-            <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+            <a href="/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
+            and
+            <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>,
             and consent to Almuallim contacting me about Quran classes. I understand my details will be used only for this enquiry.
           </span>
         </label>
         <p id="consent-error" class="consent-error" role="alert" aria-live="polite" hidden>
           Please tick the consent box before submitting the form.
         </p>
-        <span>
-  I have read and agree to the
-  <a href="/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
-  and the
-  <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>,
-  and consent to Almuallim contacting me about Quran classes. I understand my details will be used only for this enquiry.
-</span>
       </div>
 
       <button class="btn" type="submit">Request Free Trial</button>
