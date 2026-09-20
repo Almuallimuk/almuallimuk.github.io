@@ -353,6 +353,18 @@
     font-size:0.92rem; color:var(--ink); background:#fff;
   }
   .area-chip svg{flex:none; width:16px; height:16px;}
+
+  /* ✅ Clickable chip (London link) */
+  a.area-chip{
+    transition: border-color .2s ease, background .2s ease, transform .15s ease;
+  }
+  a.area-chip:hover{
+    border-color: var(--gold);
+    background: rgba(199,161,92,0.08);
+    transform: translateY(-1px);
+  }
+  a.area-chip:active{transform:translateY(0);}
+
   .areas-note{margin-top:20px; color:var(--ink-soft); font-size:0.95rem;}
 
   /* ===== ABOUT ===== */
@@ -906,7 +918,7 @@
       <p>All classes are held online, so where you live in the UK never gets in the way of a qualified, one-to-one Quran teacher.</p>
     </div>
     <div class="areas-grid">
-      <div class="area-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#C7A15C" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>London</div>
+      <a href="/online-quran-classes-london" class="area-chip" style="text-decoration:none;color:var(--ink);"><svg viewBox="0 0 24 24" fill="none" stroke="#C7A15C" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>London</a>
       <div class="area-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#C7A15C" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>Birmingham</div>
       <div class="area-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#C7A15C" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>Manchester</div>
       <div class="area-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#C7A15C" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>Leeds</div>
@@ -922,6 +934,7 @@
       <div class="area-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#C7A15C" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>Nottingham</div>
     </div>
     <p class="areas-note">Our online Quran classes in London run on UK time, so families in East London, Croydon and Ilford can fit lessons around school pick-up. We also teach Quran classes in Birmingham (Small Heath, Sparkbrook, Handsworth), Quran classes in Manchester (Rusholme, Whalley Range, Didsbury) and Quran classes in Glasgow, Leeds and Liverpool. Every city follows the same one-to-one format, from Noorani Qaida through to Hifz.</p>
+    <p class="areas-note">Looking for Quran classes in London? <a href="/online-quran-classes-london" style="color:var(--gold);font-weight:600;">See our dedicated London page →</a></p>
     <p class="areas-note">Don't see your city? We teach students right across the UK — <a href="#contact" style="color:var(--gold);font-weight:600;">get in touch</a> and we'll fit a schedule around you.</p>
   </div>
 </section>
@@ -1204,9 +1217,10 @@
     try { history.replaceState(null, '', href); } catch(err){}
   }, false);
 
+  /* ✅ London page removed from soonLinks — ab real page khulega */
   var soonLinks = [
     '/noorani-qaida','/tajweed-rules','/hifz-programme','/islamic-studies','/sisters-classes',
-    '/online-quran-classes-london','/online-quran-classes-birmingham','/online-quran-classes-manchester',
+    '/online-quran-classes-birmingham','/online-quran-classes-manchester',
     '/online-quran-classes-leeds','/online-quran-classes-glasgow'
   ];
   var overlay = document.getElementById('soonOverlay');
