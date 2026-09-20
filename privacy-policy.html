@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Privacy Policy | Almuallim Online Quran Academy UK</title>
+  <meta name="description" content="Almuallim Online Quran Academy Privacy Policy — how we collect, use and protect your personal data in line with UK GDPR.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Almuallim Online Quran Academy">
+  <meta name="theme-color" content="#0A2A1F">
+  <meta name="geo.region" content="GB">
+  <meta name="geo.placename" content="London">
+  <link rel="canonical" href="https://almuallim.uk/privacy-policy">
+
+  <link rel="icon" type="image/png" href="/Logo.png">
+  <link rel="apple-touch-icon" href="/Logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --green-deep:#0A2A1F;
+    --green:#123F2D;
+    --green-light:#2E7D54;
+    --gold:#C7A15C;
+    --gold-bright:#DDB86B;
+    --gold-soft:#EEDFB8;
+    --cream:#FBF7EC;
+    --ink:#1C2620;
+    --ink-soft:#4A564E;
+    --hairline: rgba(199,161,92,0.35);
+    --header-h: 72px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    overflow-x:clip;
+  }
+  h1,h2,h3{
+    font-family:'Cormorant Garamond', serif;
+    color:var(--green-deep);
+    font-weight:600;
+    line-height:1.2;
+  }
+  h1{font-size:clamp(1.9rem,5.5vw,3rem);}
+  h2{font-size:clamp(1.35rem,4vw,1.85rem); margin-top:2.2rem; margin-bottom:0.75rem;}
+  h3{font-size:1.15rem; margin-top:1.5rem; margin-bottom:0.5rem; color:var(--green);}
+  p{margin-bottom:1rem; color:var(--ink-soft);}
+  ul, ol{margin:0 0 1rem 1.25rem; color:var(--ink-soft);}
+  li{margin-bottom:0.4rem;}
+  a{color:var(--gold); text-decoration:underline; text-underline-offset:2px; font-weight:500;}
+  a:hover{color:var(--green-deep);}
+  strong{color:var(--green-deep); font-weight:600;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px;}
+
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:var(--green-deep); color:var(--cream);
+    padding:12px 18px; z-index:200; border-radius:0 0 6px 0;
+  }
+  .skip-link:focus{left:0;}
+  :focus-visible{outline:2px solid var(--gold-bright); outline-offset:2px;}
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:80;
+    background:rgba(251,247,236,0.95);
+    -webkit-backdrop-filter:blur(6px);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--hairline);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:var(--header-h);
+    gap:12px;
+    max-width:1120px;
+    position:relative;
+  }
+  .logo{display:flex; align-items:center; gap:8px; height:100%;}
+  .logo img{height:52px; width:auto; display:block;}
+  @media(min-width:860px){ .logo img{height:58px;} }
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:0.9rem; color:var(--green-deep);
+    padding:9px 16px; border:1px solid var(--green-deep); border-radius:999px;
+    text-decoration:none; font-weight:500;
+    transition:background .2s ease, color .2s ease;
+  }
+  .back-link:hover{ background:var(--green-deep); color:var(--cream); }
+  .back-link svg{width:14px; height:14px;}
+
+  /* HERO */
+  .policy-hero{
+    background:linear-gradient(160deg,var(--green-deep) 0%,var(--green) 100%);
+    color:var(--gold-soft);
+    padding:clamp(3rem,7vw,4.5rem) 0 clamp(2.5rem,5vw,3.5rem);
+    border-bottom:3px solid var(--gold);
+    position:relative;
+    overflow:hidden;
+  }
+  .policy-hero::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(60% 80% at 80% 20%, rgba(199,161,92,0.12), transparent 60%);
+    pointer-events:none;
+  }
+  .policy-hero .wrap{position:relative; z-index:1;}
+  .policy-hero .arabic{
+    font-family:'Amiri',serif; direction:rtl;
+    font-size:1.2rem; color:var(--gold-bright);
+    display:block; margin-bottom:0.75rem;
+  }
+  .policy-hero h1{color:var(--cream); margin-bottom:0.75rem;}
+  .policy-hero p{color:rgba(255,255,255,0.82); max-width:60ch; font-size:1rem; margin:0;}
+  .policy-hero .meta{
+    display:inline-block; margin-top:1rem;
+    font-size:0.82rem; color:var(--gold-bright);
+    letter-spacing:0.04em; font-weight:600;
+    border:1px solid rgba(199,161,92,0.4);
+    padding:6px 12px; border-radius:999px;
+  }
+
+  /* CONTENT */
+  .policy-content{padding:clamp(2.5rem,5vw,4rem) 0 clamp(3rem,6vw,4.5rem);}
+
+  /* ✅ IMPORTANT: keep section headings clear of sticky header on jump */
+  .policy-content section[id]{
+    scroll-margin-top: calc(var(--header-h) + 16px);
+  }
+
+  .toc{
+    background:#F3EEE0;
+    border:1px solid var(--hairline);
+    border-left:4px solid var(--gold);
+    border-radius:0 8px 8px 0;
+    padding:1.25rem 1.5rem;
+    margin-bottom:2rem;
+  }
+  .toc h2{margin-top:0; font-size:1.1rem; font-family:'Inter',sans-serif; font-weight:600; color:var(--green-deep); margin-bottom:0.6rem;}
+  .toc ol{margin:0 0 0 1.25rem; padding:0;}
+  .toc li{margin-bottom:0.35rem; font-size:0.92rem;}
+  .toc a{
+    color:var(--green-deep);
+    text-decoration:none;
+    font-weight:500;
+    display:inline-block;
+    padding:2px 0;
+    transition:color .15s ease, padding-left .15s ease;
+  }
+  .toc a:hover{color:var(--gold); text-decoration:underline; padding-left:3px;}
+  .toc a:focus-visible{outline:2px solid var(--gold); outline-offset:2px; border-radius:3px;}
+
+  .note{
+    background:rgba(199,161,92,0.08);
+    border-left:3px solid var(--gold);
+    padding:1rem 1.25rem;
+    border-radius:0 6px 6px 0;
+    margin:1.25rem 0;
+    font-size:0.94rem;
+    color:var(--ink-soft);
+  }
+  .note strong{color:var(--green-deep);}
+
+  .contact-box{
+    background:linear-gradient(160deg,var(--green-deep) 0%,var(--green) 100%);
+    border-radius:8px;
+    padding:2rem 1.75rem;
+    color:var(--gold-soft);
+    margin-top:2rem;
+    border-left:4px solid var(--gold);
+  }
+  .contact-box h2{color:var(--cream); margin-top:0;}
+  .contact-box p{color:rgba(255,255,255,0.85);}
+  .contact-box a{color:var(--gold-bright); font-weight:600;}
+
+  footer{
+    background:var(--green-deep); color:#C9D6CC;
+    padding:44px 0 26px; font-size:0.88rem;
+  }
+  footer .wrap{
+    max-width:1120px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:18px;
+  }
+  footer a{color:inherit; text-decoration:none;}
+  footer a:hover{color:var(--gold);}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* Floating WhatsApp */
+  .almuallim-whatsapp {
+    position: fixed; right: 22px; bottom: 22px;
+    width: 58px; height: 58px;
+    background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .almuallim-whatsapp:hover { transform: scale(1.08); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35); }
+  .almuallim-whatsapp:active { transform: scale(0.96); }
+  .almuallim-whatsapp svg { width: 31px; height: 31px; fill: white; }
+  @media (max-width: 600px) {
+    .almuallim-whatsapp { width: 54px; height: 54px; right: 16px; bottom: 16px; }
+    .almuallim-whatsapp svg { width: 29px; height: 29px; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+  <nav class="wrap">
+    <a href="/" class="logo" aria-label="Almuallim — Home">
+      <img src="/Logo.png" alt="Almuallim Online Quran Academy logo" width="58" height="58" loading="eager" decoding="async">
+    </a>
+    <a href="/" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to Home
+    </a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="policy-hero">
+    <div class="wrap">
+      <span class="arabic" lang="ar" dir="rtl">سِيَاسَةُ الْخُصُوصِيَّة</span>
+      <h1>Privacy Policy</h1>
+      <p>How Almuallim Online Quran Academy collects, uses and protects your personal information, in line with UK GDPR and the Data Protection Act 2018.</p>
+      <span class="meta">Last updated: 20 September 2026</span>
+    </div>
+  </section>
+
+  <section class="policy-content">
+    <div class="wrap">
+
+      <!-- Table of Contents -->
+      <nav class="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#intro">Introduction</a></li>
+          <li><a href="#who-we-are">Who We Are</a></li>
+          <li><a href="#what-we-collect">What Information We Collect</a></li>
+          <li><a href="#how-we-collect">How We Collect Your Information</a></li>
+          <li><a href="#why-we-use">Why We Use Your Information</a></li>
+          <li><a href="#legal-basis">Our Legal Basis (UK GDPR)</a></li>
+          <li><a href="#children">Children's Privacy</a></li>
+          <li><a href="#sharing">Sharing Your Information</a></li>
+          <li><a href="#retention">How Long We Keep Your Data</a></li>
+          <li><a href="#your-rights">Your Rights</a></li>
+          <li><a href="#cookies">Cookies</a></li>
+          <li><a href="#security">How We Protect Your Data</a></li>
+          <li><a href="#changes">Changes to This Policy</a></li>
+          <li><a href="#contact-privacy">Contact Us</a></li>
+        </ol>
+      </nav>
+
+      <section id="intro">
+        <h2>1. Introduction</h2>
+        <p>This Privacy Policy explains how <strong>Almuallim Online Quran Academy</strong> ("Almuallim", "we", "us", "our") collects, uses, stores and protects personal information when you visit our website at <a href="https://almuallim.uk/">almuallim.uk</a>, submit an enquiry form, contact us on WhatsApp, or enrol in our online Quran classes.</p>
+        <p>We take your privacy seriously. This policy is written to be clear and readable, so you understand exactly what happens to your data. By using our website or services, you agree to the practices described in this policy.</p>
+      </section>
+
+      <section id="who-we-are">
+        <h2>2. Who We Are</h2>
+        <p>Almuallim is an online Quran academy providing one-to-one Tajweed, Hifz, Noorani Qaida and Islamic Studies classes to students across the United Kingdom and worldwide.</p>
+        <ul>
+          <li><strong>Academy name:</strong> Almuallim Online Quran Academy</li>
+          <li><strong>Website:</strong> <a href="https://almuallim.uk/">almuallim.uk</a></li>
+          <li><strong>Email:</strong> <a href="mailto:info@almuallim.uk">info@almuallim.uk</a></li>
+          <li><strong>Data Controller:</strong> Almuallim Online Quran Academy is the data controller responsible for your personal information.</li>
+        </ul>
+      </section>
+
+      <section id="what-we-collect">
+        <h2>3. What Information We Collect</h2>
+        <p>We only collect the information we need to respond to your enquiry and arrange Quran classes. This may include:</p>
+        <ul>
+          <li><strong>Contact details:</strong> your name, email address, city, and WhatsApp or phone number.</li>
+          <li><strong>Enquiry details:</strong> the course you are interested in (e.g. Noorani Qaida, Tajweed, Hifz), the student's age, preferred class timing, and any message you send us.</li>
+          <li><strong>Consent record:</strong> confirmation that you agreed to this Privacy Policy when submitting a form.</li>
+          <li><strong>Technical data:</strong> basic, non-identifying information such as browser type and approximate location, collected automatically by our hosting provider for security and performance.</li>
+        </ul>
+        <p>We <strong>do not</strong> collect payment card details through this website, and we do not ask for any sensitive personal data (such as health or religious belief details) in our enquiry forms.</p>
+      </section>
+
+      <section id="how-we-collect">
+        <h2>4. How We Collect Your Information</h2>
+        <ul>
+          <li><strong>Free trial form:</strong> when you fill in the form on our <a href="https://almuallim.uk/#contact">Contact section</a>.</li>
+          <li><strong>WhatsApp:</strong> when you message us using the floating WhatsApp button or the number listed on our site.</li>
+          <li><strong>Email:</strong> when you contact us at <a href="mailto:info@almuallim.uk">info@almuallim.uk</a>.</li>
+          <li><strong>Automatically:</strong> limited technical data collected by our hosting provider when you browse the site.</li>
+        </ul>
+      </section>
+
+      <section id="why-we-use">
+        <h2>5. Why We Use Your Information</h2>
+        <p>We use your personal information only for the following purposes:</p>
+        <ul>
+          <li>To reply to your enquiry and arrange your <strong>free trial class</strong>.</li>
+          <li>To match you with a suitable teacher and schedule classes in UK time.</li>
+          <li>To communicate with you about your lessons, progress and scheduling.</li>
+          <li>To keep a record of your consent, as required by data protection law.</li>
+          <li>To improve our website and services based on general, non-identifying usage patterns.</li>
+        </ul>
+        <p>We will <strong>never sell</strong> your personal information, and we will not send you marketing messages unrelated to Quran classes without your permission.</p>
+      </section>
+
+      <section id="legal-basis">
+        <h2>6. Our Legal Basis (UK GDPR)</h2>
+        <p>Under the UK GDPR, we must have a lawful basis for processing your personal data. We rely on:</p>
+        <ul>
+          <li><strong>Consent</strong> — you tick the consent box on our contact form, and you can withdraw consent at any time by emailing us.</li>
+          <li><strong>Legitimate interest</strong> — replying to genuine enquiries and providing the educational service you have requested.</li>
+          <li><strong>Legal obligation</strong> — where we are required by law to keep certain records.</li>
+        </ul>
+      </section>
+
+      <section id="children">
+        <h2>7. Children's Privacy</h2>
+        <p>Many of our students are children. We take children's privacy very seriously.</p>
+        <ul>
+          <li>Enquiries about students under the age of 16 must be made by a <strong>parent or legal guardian</strong>.</li>
+          <li>We only collect a child's first name, age and learning preferences — the minimum needed to arrange classes.</li>
+          <li>We never market directly to children, and we never publish a student's personal details.</li>
+          <li>Parents can request access to, correction of, or deletion of their child's data at any time.</li>
+        </ul>
+        <div class="note">
+          <strong>Parental consent:</strong> By submitting an enquiry on behalf of a child, you confirm that you are the parent or legal guardian, or that you have the parent's permission to do so.
+        </div>
+      </section>
+
+      <section id="sharing">
+        <h2>8. Sharing Your Information</h2>
+        <p>We do not sell your data. We only share your information with trusted service providers who help us operate the academy:</p>
+        <ul>
+          <li><strong>FormSubmit</strong> — our contact form is delivered to our email through FormSubmit (formsubmit.co). Their own privacy policy applies to the transmission of form data.</li>
+          <li><strong>Our teachers</strong> — only the information necessary to prepare and deliver your lessons.</li>
+          <li><strong>Legal authorities</strong> — only when required by law.</li>
+        </ul>
+        <p>Some service providers may process data outside the UK. Where this happens, we ensure appropriate safeguards are in place, such as standard contractual clauses approved by the UK Information Commissioner's Office.</p>
+      </section>
+
+      <section id="retention">
+        <h2>9. How Long We Keep Your Data</h2>
+        <p>We believe in keeping data for the <strong>shortest time necessary</strong>. Because our enrolment process is simple — match the student with a suitable teacher — we do not need to retain enquiry details long-term.</p>
+        <ul>
+          <li><strong>Enquiry / trial request data:</strong> kept only for the short period needed to review your request and connect you with a teacher — typically <strong>about one week</strong>.</li>
+          <li><strong>Once a teacher has been assigned</strong> and the class is arranged, the original enquiry data (name, email, city, WhatsApp number, message) is <strong>securely deleted</strong> from our records.</li>
+          <li><strong>Ongoing student records:</strong> if you continue with classes, only the minimum details needed for scheduling and lesson delivery are kept, and deleted within 12 months after classes end.</li>
+          <li><strong>Consent records:</strong> kept for as long as needed to demonstrate compliance with data protection law.</li>
+        </ul>
+        <div class="note">
+          <strong>In short:</strong> we do not hold on to your data any longer than necessary. Once we have matched you with a teacher, your initial enquiry data is deleted.
+        </div>
+      </section>
+
+      <section id="your-rights">
+        <h2>10. Your Rights</h2>
+        <p>Under the UK GDPR, you have the right to:</p>
+        <ul>
+          <li><strong>Access</strong> — request a copy of the personal data we hold about you.</li>
+          <li><strong>Rectification</strong> — ask us to correct any inaccurate information.</li>
+          <li><strong>Erasure</strong> — ask us to delete your data ("right to be forgotten").</li>
+          <li><strong>Restrict processing</strong> — ask us to pause how we use your data.</li>
+          <li><strong>Withdraw consent</strong> — at any time, without affecting past lawful use.</li>
+          <li><strong>Portability</strong> — request your data in a common, machine-readable format.</li>
+          <li><strong>Complain</strong> — to the UK Information Commissioner's Office (ICO) at <a href="https://ico.org.uk/" target="_blank" rel="noopener noreferrer">ico.org.uk</a>.</li>
+        </ul>
+        <p>To exercise any of these rights, email us at <a href="mailto:info@almuallim.uk">info@almuallim.uk</a>. We will respond within 30 days.</p>
+      </section>
+
+      <section id="cookies">
+        <h2>11. Cookies</h2>
+        <p>Our website uses only essential and minimal functionality. We do <strong>not</strong> run advertising cookies or third-party tracking pixels.</p>
+        <ul>
+          <li>Our hosting provider may set basic security cookies needed to serve the site.</li>
+          <li>Embedded fonts (Google Fonts) are loaded from Google's servers; Google's own privacy terms apply.</li>
+        </ul>
+        <p>You can control or delete cookies through your browser settings at any time.</p>
+      </section>
+
+      <section id="security">
+        <h2>12. How We Protect Your Data</h2>
+        <ul>
+          <li>Our website is served over <strong>HTTPS</strong> (secure, encrypted connection).</li>
+          <li>Form submissions are delivered to a protected email inbox.</li>
+          <li>Access to your information is limited to staff and teachers who need it to help you.</li>
+          <li>We regularly review our practices to keep your data safe.</li>
+        </ul>
+        <p>While no online transmission is 100% secure, we take reasonable technical and organisational steps to protect your information.</p>
+      </section>
+
+      <section id="changes">
+        <h2>13. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in law or our services. The "Last updated" date at the top of this page will always show the current version. Please check back periodically.</p>
+      </section>
+
+      <section id="contact-privacy">
+        <h2>14. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy or how we handle your data, please get in touch:</p>
+        <div class="contact-box">
+          <h2>Almuallim Online Quran Academy</h2>
+          <p><strong style="color:var(--gold-bright);">Email:</strong> <a href="mailto:info@almuallim.uk">info@almuallim.uk</a></p>
+          <p><strong style="color:var(--gold-bright);">Website:</strong> <a href="https://almuallim.uk/">almuallim.uk</a></p>
+          <p style="margin-bottom:0;"><strong style="color:var(--gold-bright);">WhatsApp:</strong> available via the floating button on our website.</p>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <img src="/Logo.png" alt="Almuallim" width="90" height="90" loading="lazy" style="margin-bottom:10px;">
+      <p style="margin-top:6px;">Almuallim Online Quran Academy — teaching UK students, one student at a time.</p>
+      <p style="margin-top:6px;"><a href="mailto:info@almuallim.uk">info@almuallim.uk</a></p>
+      <p style="margin-top:6px;"><a href="https://almuallim.uk/">almuallim.uk</a></p>
+    </div>
+    <div>
+      © <span id="year"></span> Almuallim. All rights reserved. · <a href="/privacy-policy">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a
+  class="almuallim-whatsapp"
+  href="https://wa.me/923126333353?text=Assalamu%20Alaikum%2C%20I%20would%20like%20to%20enquire%20about%20Quran%20and%20Islamic%20Studies%20classes%20at%20Almuallim%20Academy."
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contact Almuallim Academy on WhatsApp"
+  title="Contact us on WhatsApp"
+>
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M19.11 17.22c-.27-.14-1.59-.78-1.84-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.97 2.63 1.11 2.81c.14.18 1.9 2.9 4.6 4.07.64.28 1.14.44 1.53.56.64.2 1.22.17 1.68.1.51-.08 1.59-.65 1.81-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/>
+    <path d="M16 2.67c-7.36 0-13.33 5.97-13.33 13.33 0 2.35.61 4.64 1.77 6.66L2.6 29.33l6.86-1.8A13.26 13.26 0 0 0 16 29.33c7.36 0 13.33-5.97 13.33-13.33S23.36 2.67 16 2.67zm0 24.21c-2.14 0-4.23-.58-6.06-1.69l-.43-.26-4.07 1.07 1.09-3.97-.28-.43a10.78 10.78 0 0 1-1.65-5.6C4.6 10.03 9.72 4.91 16 4.91s11.39 5.12 11.39 11.39S22.28 26.88 16 26.88z"/>
+  </svg>
+</a>
+
+<script>
+  (function(){
+    "use strict";
+
+    var yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // ✅ Smooth-scroll for TOC + in-page anchors, with sticky header offset
+    function headerOffset(){
+      var h = document.querySelector('header');
+      return h ? h.offsetHeight : 72;
+    }
+
+    function scrollToId(id){
+      var target = document.getElementById(id);
+      if (!target) return;
+      var y = target.getBoundingClientRect().top
+            + (window.pageYOffset || document.documentElement.scrollTop || 0)
+            - headerOffset() - 16;
+      if (y < 0) y = 0;
+      try {
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      } catch (err) {
+        window.scrollTo(0, y);
+      }
+    }
+
+    document.addEventListener('click', function(e){
+      var el = e.target;
+      if (!el || !el.closest) return;
+      var link = el.closest('a[href^="#"]');
+      if (!link) return;
+
+      var href = link.getAttribute('href');
+      if (!href || href === '#' || href.length < 2) return;
+
+      var id = href.slice(1);
+      var target = document.getElementById(id);
+      if (!target) return;
+
+      e.preventDefault();
+      scrollToId(id);
+      try { history.replaceState(null, '', href); } catch(err){}
+    }, false);
+
+    // If page loads with a #hash, scroll correctly after a short delay
+    if (window.location.hash) {
+      var initialId = window.location.hash.slice(1);
+      if (document.getElementById(initialId)) {
+        setTimeout(function(){ scrollToId(initialId); }, 60);
+      }
+    }
+  })();
+</script>
+</body>
+</html>
