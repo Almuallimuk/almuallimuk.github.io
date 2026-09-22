@@ -10,6 +10,22 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Teachers Page -->
+  <url>
+    <loc>https://almuallim.uk/teachers.html</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- London Page -->
+  <url>
+    <loc>https://almuallim.uk/online-quran-classes-london</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Privacy Policy -->
   <url>
     <loc>https://almuallim.uk/privacy-policy</loc>
@@ -24,12 +40,6 @@
     <lastmod>2026-09-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://almuallim.uk/online-quran-classes-london</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
         
   <!-- ============================================= -->
