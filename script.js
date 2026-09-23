@@ -1,0 +1,31 @@
+(function(){"use strict";
+var yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear();
+var hamburger=document.getElementById('hamburger'),navlinks=document.getElementById('navlinks');
+function closeMenu(){if(navlinks)navlinks.classList.remove('open');if(hamburger){hamburger.setAttribute('aria-expanded','false');hamburger.setAttribute('aria-label','Open menu');}}
+if(hamburger&&navlinks){
+hamburger.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var isOpen=navlinks.classList.toggle('open');hamburger.setAttribute('aria-expanded',isOpen?'true':'false');hamburger.setAttribute('aria-label',isOpen?'Close menu':'Open menu');});
+document.addEventListener('click',function(e){if(!navlinks.classList.contains('open'))return;if(navlinks.contains(e.target)||hamburger.contains(e.target))return;closeMenu();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&navlinks.classList.contains('open')){closeMenu();hamburger.focus();}});
+}
+function headerOffset(){var h=document.querySelector('header');return h?h.offsetHeight:72;}
+function scrollToId(id){var t=document.getElementById(id);if(!t)return;var y=t.getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop||0)-headerOffset()-8;if(y<0)y=0;try{window.scrollTo({top:y,behavior:'smooth'});}catch(err){window.scrollTo(0,y);}}
+document.addEventListener('click',function(e){var el=e.target;if(!el||!el.closest)return;var link=el.closest('a[href^="#"]');if(!link)return;var href=link.getAttribute('href');if(!href||href==='#'||href.length<2)return;var id=href.slice(1);if(!document.getElementById(id))return;e.preventDefault();closeMenu();scrollToId(id);try{history.replaceState(null,'',href);}catch(err){}},false);
+var form=document.getElementById('trialForm');
+if(form){
+var consent=form.querySelector('#consent'),consentField=consent?consent.closest('.consent-field'):null,consentError=form.querySelector('#consent-error');
+var success=document.getElementById('form-success'),submitBtn=form.querySelector('button[type="submit"]'),ajaxFailed=false;
+function showErr(msg){if(consentError){consentError.textContent=msg;consentError.hidden=false;}if(consentField){consentField.classList.remove('invalid');void consentField.offsetWidth;consentField.classList.add('invalid');}if(consent)consent.focus();}
+function clearErr(){if(consentError)consentError.hidden=true;if(consentField)consentField.classList.remove('invalid');}
+if(consent)consent.addEventListener('change',function(){if(consent.checked)clearErr();});
+form.addEventListener('submit',function(e){
+if(ajaxFailed)return;clearErr();
+if(!consent||!consent.checked){e.preventDefault();e.stopPropagation();showErr('Please tick the consent box before submitting the form.');return false;}
+e.preventDefault();var originalText=submitBtn?submitBtn.textContent:'';
+if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Sending…';}
+fetch('https://formsubmit.co/ajax/almuallimacademy0@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
+.then(function(r){if(!r.ok)throw new Error('Request failed');return r.json();})
+.then(function(){form.hidden=true;if(success){success.hidden=false;try{success.scrollIntoView({behavior:'smooth',block:'center'});}catch(err){}}})
+.catch(function(){ajaxFailed=true;if(submitBtn){submitBtn.disabled=false;submitBtn.textContent=originalText||'Request Free Trial';}form.submit();});
+},true);
+}
+})();
