@@ -1,5 +1,3 @@
----
----
 :root{--green-deep:#0A2A1F;--green:#123F2D;--green-light:#2E7D54;--gold:#C7A15C;--gold-bright:#DDB86B;--gold-soft:#EEDFB8;--cream:#FBF7EC;--ink:#1C2620;--ink-soft:#4A564E;--hairline:rgba(199,161,92,0.35);--header-h:72px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip}
