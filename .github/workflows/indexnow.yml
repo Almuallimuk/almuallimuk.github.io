@@ -12,49 +12,24 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
-      - name: Get changed files
-        id: changed
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "files=sitemap.xml" >> $GITHUB_OUTPUT
-          else
-            CHANGED=$(git diff --name-only HEAD^ HEAD | grep '\.html$' | tr '\n' ' ' || true)
-            echo "files=$CHANGED" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Build URL list
+      - name: Extract URLs from sitemap
         id: urls
         run: |
-          FILES="${{ steps.changed.outputs.files }}"
-          URLS=""
-          for f in $FILES; do
-            if [ "$f" = "sitemap.xml" ]; then
-              URLS=$(grep -oP '(?<=<loc>)[^<]+' sitemap.xml | tr '\n' ',')
-            elif [[ "$f" == *.html ]]; then
-              PATH_CLEAN=${f%.html}
-              if [ "$PATH_CLEAN" = "index" ]; then
-                URLS="$URLS,https://almuallim.uk/"
-              else
-                URLS="$URLS,https://almuallim.uk/$PATH_CLEAN.html"
-              fi
-            fi
-          done
-          URLS=$(echo "$URLS" | sed 's/^,//')
+          URLS=$(grep -oE '<loc>[^<]+</loc>' sitemap.xml | sed 's/<[^>]*>//g' | tr '\n' ',')
+          URLS=$(echo "$URLS" | sed 's/,$//')
           echo "urls=$URLS" >> $GITHUB_OUTPUT
+          echo "URLs found:"
+          echo "$URLS" | tr ',' '\n'
+          echo "Total:"
+          echo "$URLS" | tr ',' '\n' | wc -l
 
       - name: Submit to IndexNow
         run: |
           URLS="${{ steps.urls.outputs.urls }}"
-          if [ -z "$URLS" ]; then
-            echo "No URLs to submit"
-            exit 0
-          fi
-          
           JSON_URLS=$(echo "$URLS" | tr ',' '\n' | sed 's/.*/"&"/' | tr '\n' ',' | sed 's/,$//')
           
+          echo "Submitting to IndexNow..."
           curl -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json" \
             -d "{
@@ -62,4 +37,4 @@ jobs:
               \"key\": \"5bf96f9501934c0fbeb15e51a0ad06de\",
               \"keyLocation\": \"https://almuallim.uk/5bf96f9501934c0fbeb15e51a0ad06de.txt\",
               \"urlList\": [$JSON_URLS]
-            }"
+            }" -w "\n\nHTTP Status: %{http_code}\n"
