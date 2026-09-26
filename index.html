@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Online Quran Academy UK | Tajweed, Hifz &amp; Qaida — Almuallim</title>
-  <meta name="description" content="Almuallim is a UK online Quran academy offering 1:1 Tajweed, Hifz &amp; Qaida classes with qualified teachers, UK-time scheduling. Book a free trial today.">
+  <meta name="description" content="Almuallim is a UK online Quran academy offering 1:1 Tajweed, Hifz &amp; Qaida classes from £32/month with qualified teachers, UK-time scheduling. Book a free trial today.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Almuallim Online Quran Academy">
   <meta name="theme-color" content="#0A2A1F">
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Almuallim">
   <meta property="og:title" content="Online Quran Academy UK | Tajweed, Hifz &amp; Qaida — Almuallim">
-  <meta property="og:description" content="1:1 online Quran classes for UK students in London, Birmingham, Manchester &amp; beyond. Qualified teachers, UK-time scheduling, free trial available.">
+  <meta property="og:description" content="1:1 online Quran classes for UK students in London, Birmingham, Manchester &amp; beyond. From £32/month. Free trial available.">
   <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="https://almuallim.uk/">
   <meta property="og:image" content="https://almuallim.uk/og-image.jpg">
@@ -48,7 +48,7 @@
       "email": "info@almuallim.uk",
       "logo": "https://almuallim.uk/Logo.png",
       "image": "https://almuallim.uk/og-image.jpg",
-      "description": "Online Quran academy teaching Noorani Qaida, Tajweed, Hifz and Tafseer to students across the UK through one-to-one classes with qualified teachers.",
+      "description": "Online Quran academy teaching Noorani Qaida, Tajweed, Hifz, Tarjuma and Islamiat to students across the UK through one-to-one classes with qualified Dars-e-Nizami teachers.",
       "areaServed": [
         {"@type": "City", "name": "London"},
         {"@type": "City", "name": "Birmingham"},
@@ -60,6 +60,11 @@
         {"@type": "City", "name": "Bristol"},
         {"@type": "City", "name": "Edinburgh"},
         {"@type": "City", "name": "Cardiff"}
+      ],
+      "makesOffer": [
+        {"@type": "Offer", "name": "Starter Package", "description": "2 classes per week, 30 minutes each. 8 classes per month.", "price": "32", "priceCurrency": "GBP", "url": "https://almuallim.uk/pricing.html", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "4.00", "priceCurrency": "GBP", "unitText": "per 30-minute class"}},
+        {"@type": "Offer", "name": "Standard Package", "description": "3 classes per week, 30 minutes each. 12 classes per month.", "price": "42", "priceCurrency": "GBP", "url": "https://almuallim.uk/pricing.html", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "3.50", "priceCurrency": "GBP", "unitText": "per 30-minute class"}},
+        {"@type": "Offer", "name": "Intensive Package", "description": "5 classes per week, 30 minutes each. 20 classes per month.", "price": "60", "priceCurrency": "GBP", "url": "https://almuallim.uk/pricing.html", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "3.00", "priceCurrency": "GBP", "unitText": "per 30-minute class"}}
       ]
     },
     {
@@ -84,7 +89,7 @@
         {"@type": "Question", "name": "What do I need for an online class?",
          "acceptedAnswer": {"@type": "Answer", "text": "Just a phone, tablet or laptop with a camera and a stable internet connection, no special software or equipment required."}},
         {"@type": "Question", "name": "How much do online Quran classes cost in the UK?",
-         "acceptedAnswer": {"@type": "Answer", "text": "Our fees are competitive with other UK online Quran academies and depend on the number of classes per week and session length. Contact us for a clear breakdown with no hidden charges."}},
+         "acceptedAnswer": {"@type": "Answer", "text": "Plans start from £32 per month for 2 classes per week (£4 per 30-minute class). The Standard package is £42 per month for 3 classes per week (£3.50 per class), and the Intensive package is £60 per month for 5 classes per week (£3 per class). Sibling and loyalty discounts are available."}},
         {"@type": "Question", "name": "How long does it take to learn to read the Quran with Tajweed?",
          "acceptedAnswer": {"@type": "Answer", "text": "With weekly one-to-one lessons and 15–30 minutes of daily home practice, most children reach basic Quran reading fluency within 6–12 months. Tajweed mastery develops progressively."}}
       ]
@@ -201,7 +206,6 @@
     .navlinks a{padding:8px 11px; border-top:none; border-radius:4px;}
     .nav-cta{padding:12px 22px; font-size:0.9rem;}
     .navlinks .navlinks-sub{display:none;}
-    /* FIX: prevent absolute positioning leaking from mobile .open state */
     .navlinks.open{position:static; background:none; border:none; box-shadow:none; left:auto; right:auto; top:auto;}
   }
   @media(max-width:400px){.nav-cta{display:none;}}
@@ -264,6 +268,64 @@
     .course-num{font-size:2.3rem;}
     .course-meta{grid-column:auto; text-align:right;}
   }
+
+  /* ===== TEACHER PREVIEW ===== */
+  .teacher-preview-grid{display:grid; grid-template-columns:1fr; gap:18px;}
+  @media(min-width:700px){.teacher-preview-grid{grid-template-columns:repeat(3,1fr);}}
+  .teacher-preview-card{
+    background:#fff; border:1px solid var(--hairline); border-radius:10px;
+    padding:28px 22px; text-align:center;
+    transition:border-color .2s ease, transform .15s ease, box-shadow .2s ease;
+  }
+  .teacher-preview-card:hover{
+    border-color:var(--gold); transform:translateY(-3px);
+    box-shadow:0 10px 28px rgba(10,42,31,0.08);
+  }
+  .teacher-preview-card .avatar-sm{
+    width:76px; height:76px; border-radius:50%;
+    background:linear-gradient(145deg,var(--gold-bright),var(--gold));
+    color:var(--green-deep);
+    font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 16px; border:3px solid var(--gold-bright);
+    box-shadow:0 6px 18px rgba(10,42,31,0.15);
+  }
+  .teacher-preview-card h3{font-size:1.15rem; margin-bottom:4px;}
+  .teacher-preview-card .role{
+    font-size:0.72rem; color:var(--gold); font-weight:700;
+    letter-spacing:0.06em; text-transform:uppercase;
+    margin-bottom:12px; display:block;
+  }
+  .teacher-preview-card .bio-sm{
+    font-size:0.88rem; color:var(--ink-soft); line-height:1.55;
+  }
+  .teacher-preview-cta{text-align:center; margin-top:34px;}
+
+  /* ===== PRICING SUMMARY ===== */
+  .price-summary{display:grid; grid-template-columns:1fr; gap:14px; margin-top:8px;}
+  @media(min-width:700px){.price-summary{grid-template-columns:repeat(3,1fr); gap:18px;}}
+  .price-summary-item{
+    background:#fff; border:1px solid var(--hairline); border-radius:10px;
+    padding:26px 20px; text-align:center; position:relative;
+    transition:border-color .2s ease, transform .15s ease;
+  }
+  .price-summary-item:hover{border-color:var(--gold); transform:translateY(-3px);}
+  .price-summary-item.featured{border-color:var(--gold); box-shadow:0 8px 24px rgba(10,42,31,.10);}
+  .ps-badge{
+    position:absolute; top:-11px; left:50%; transform:translateX(-50%);
+    background:var(--gold); color:var(--green-deep);
+    font-size:.66rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 12px; border-radius:999px; white-space:nowrap;
+  }
+  .price-summary-item h3{font-size:1.15rem; margin-bottom:12px;}
+  .ps-price{font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:600; color:var(--green-deep); line-height:1;}
+  .ps-price span{font-family:'Inter',sans-serif; font-size:.78rem; color:var(--ink-soft); font-weight:400;}
+  .ps-rate{margin-top:12px; font-size:.82rem; color:var(--ink-soft); font-weight:500;}
+  .price-summary-extras{
+    display:flex; gap:12px 26px; flex-wrap:wrap; justify-content:center;
+    margin-top:26px; font-size:.9rem; color:var(--green-deep); font-weight:500; text-align:center;
+  }
+  .price-summary-cta{text-align:center; margin-top:26px;}
 
   /* ===== AYAT ===== */
   .ayat-grid{display:grid; grid-template-columns:1fr; gap:18px;}
@@ -421,7 +483,7 @@
   .form-success h3{margin-bottom:10px;font-size:1.4rem;}
   .form-success p{color:var(--ink-soft);margin-bottom:18px;}
 
-  /* Floating WhatsApp — FIXED: mobile pe CTA bar ke upar */
+  /* Floating WhatsApp */
   .almuallim-whatsapp {
     position: fixed; right: 22px; bottom: 22px;
     width: 58px; height: 58px;
@@ -458,13 +520,17 @@
     </div>
     <div class="navlinks" id="navlinks">
       <a href="/courses/courses.html">Courses</a>
-      <a href="#ayat">Fazail of Quran</a>
-      <a href="#areas">Cities We Teach</a>
-      <a href="/teachers.html">Our Teachers</a>
-      <a href="#about">About</a>
-      <a href="#testimonials">Testimonials</a>
+      <a href="/teachers.html">Teachers</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/blog.html">Blogs</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
+      <a href="#ayat" class="navlinks-sub">Fazail of Quran</a>
+      <a href="#areas" class="navlinks-sub">Cities We Teach</a>
+      <a href="#about" class="navlinks-sub">About</a>
+      <a href="#testimonials" class="navlinks-sub">Testimonials</a>
+      <a href="/online-quran-classes-london.html" class="navlinks-sub">Quran Classes London</a>
+      <a href="/online-quran-classes-birmingham.html" class="navlinks-sub">Quran Classes Birmingham</a>
       <a href="/privacy-policy.html" class="navlinks-sub">Privacy Policy</a>
       <a href="/terms-of-service.html" class="navlinks-sub">Terms of Service</a>
     </div>
@@ -478,15 +544,15 @@
     <div class="fade-in">
       <span class="eyebrow-ar" lang="ar" dir="rtl">وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا</span>
       <h1>Learn Qur'an online with Tajweed, Hifz &amp; Noorani Qaida</h1>
-      <p class="lede">Almuallim connects students across the UK with qualified Quran teachers, for one-to-one online classes in Tajweed, Hifz and Qur'an reading — from the comfort of home, scheduled in UK time.</p>
+      <p class="lede">Almuallim connects students across the UK with qualified Quran teachers, for one-to-one online classes in Tajweed, Hifz, Tarjuma and Qur'an reading — from the comfort of home, scheduled in UK time, from £32/month.</p>
       <div class="hero-ctas">
         <a href="#contact" class="btn">Book a Free Trial Class</a>
-        <a href="/courses/courses.html" class="btn btn-outline">View Courses</a>
+        <a href="/pricing.html" class="btn btn-outline">See Pricing</a>
       </div>
       <div class="trust-row">
         <div><strong>1:1</strong>Personalised online classes</div>
-        <div><strong>UK</strong>Timezone-friendly scheduling</div>
-        <div><strong>All Levels</strong>Beginners to Hifz</div>
+        <div><strong>From £32</strong>Per month</div>
+        <div><strong>Free</strong>Trial class, no card required</div>
       </div>
     </div>
 
@@ -528,9 +594,9 @@
 <section id="quick-answer" style="padding-top:0;">
   <div class="wrap">
     <div class="quick-answer">
-      <strong>Quick answer:</strong> Almuallim is an online Quran academy serving UK families with one-to-one live classes in Noorani Qaida, Tajweed, Hifz and Islamic Studies. All teachers are qualified and vetted, scheduling is UK-timezone friendly, and every new student can book a free trial class before committing. Classes are available across London, Birmingham, Manchester, Leeds, Glasgow, Liverpool, Sheffield, Bristol, Edinburgh and Cardiff.
+      <strong>Quick answer:</strong> Almuallim is an online Quran academy serving UK families with one-to-one live classes in Noorani Qaida, Tajweed, Hifz, English Tarjuma and Islamic Studies. All teachers are Dars-e-Nizami qualified and vetted, scheduling is UK-timezone friendly, and every new student can book a free trial class before committing. Plans start from £32 per month. Classes are available across London, Birmingham, Manchester, Leeds, Glasgow, Liverpool, Sheffield, Bristol, Edinburgh and Cardiff.
     </div>
-    <p class="author-line">Reviewed by our teaching team. Last updated: <time datetime="2026-06-01">1 June 2026</time>.</p>
+    <p class="author-line">Reviewed by our teaching team. Last updated: <time datetime="2026-09-26">26 September 2026</time>.</p>
   </div>
 </section>
 
@@ -543,7 +609,7 @@
     </div>
     <p style="color:var(--ink-soft); margin-bottom:1.5rem;">Almuallim is a one-to-one online Quran academy serving students across the UK. Rather than squeezing children into fixed group schedules, every lesson is built around the individual — their level, their pace, their goals. That means a 5-year-old starting Noorani Qaida has a different experience to an adult returning to Quran reading, even though both are taught by the same standard of qualified, vetted teacher.</p>
     <ul class="about-list">
-      <li><strong>Qualified, vetted teachers</strong>Every tutor is assessed for Tajweed accuracy and teaching ability before joining.</li>
+      <li><strong>Qualified, vetted teachers</strong>Every tutor is Dars-e-Nizami certified and assessed for Tajweed accuracy and teaching ability before joining.</li>
       <li><strong>Structured curriculum</strong>Noorani Qaida through to Hifz, with clear milestones at every stage.</li>
       <li><strong>One-to-one online classes</strong>Every lesson is private — no group pacing, no waiting, no falling behind.</li>
       <li><strong>Sisters-only option</strong>Female tutors available for sisters and young girls who prefer a female-only learning environment.</li>
@@ -611,6 +677,81 @@
         <p>Flexible one-to-one lessons for adults returning to Quran reading or starting from scratch — no judgement, just steady progress at your pace.</p>
       </div>
       <div class="course-meta">Adults · All Levels · <a href="/courses/adult-quran-classes.html">View →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TEACHERS PREVIEW ═══ -->
+<section id="teachers-preview">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="arabic" lang="ar" dir="rtl">مُعَلِّمُونَا</span>
+      <h2>The teachers behind every lesson</h2>
+      <p>Every Almuallim lesson is delivered live by a formally qualified, Dars-e-Nizami certified teacher — never a pre-recorded video and never a group call.</p>
+    </div>
+
+    <div class="teacher-preview-grid">
+      <div class="teacher-preview-card">
+        <div class="avatar-sm" aria-hidden="true">RB</div>
+        <h3>Ustadha Rabia Batool</h3>
+        <span class="role">Head Teacher</span>
+        <p class="bio-sm">Dars-e-Nizami (Aalmia) — 6 years formal study, plus Qiraat &amp; Naat certification. Teaches female students and young boys in English.</p>
+      </div>
+      <div class="teacher-preview-card">
+        <div class="avatar-sm" aria-hidden="true">HF</div>
+        <h3>Hafiz Qari Faizan</h3>
+        <span class="role">Hifz &amp; Tajweed Specialist</span>
+        <p class="bio-sm">Hafiz-ul-Quran with formal Sanad and certified Qari. Leads all Hifz programmes with structured daily Sabaq and Muraja'ah.</p>
+      </div>
+      <div class="teacher-preview-card">
+        <div class="avatar-sm" aria-hidden="true">HB</div>
+        <h3>Qari Haroon Bastami</h3>
+        <span class="role">Qirat, Tarjuma &amp; Islamiat</span>
+        <p class="bio-sm">Certified Qari specialising in Tajweed, English Tarjuma (Qur'an translation) and Islamiat for UK students of all ages.</p>
+      </div>
+    </div>
+
+    <div class="teacher-preview-cta">
+      <a href="/teachers.html" class="btn btn-outline">Meet the full team →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING SUMMARY ═══ -->
+<section id="pricing-summary" class="band-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="arabic" lang="ar" dir="rtl">الرَّسُوم</span>
+      <h2>Simple, transparent pricing</h2>
+      <p>All classes are 1-to-1, 30 minutes, in UK time. Every plan starts with a free trial — no card required. No registration fee.</p>
+    </div>
+
+    <div class="price-summary">
+      <div class="price-summary-item">
+        <h3>Starter</h3>
+        <div class="ps-price">£32<span>/mo</span></div>
+        <div class="ps-rate">£4.00/class · 2 per week</div>
+      </div>
+      <div class="price-summary-item featured">
+        <span class="ps-badge">Most Popular</span>
+        <h3>Standard</h3>
+        <div class="ps-price">£42<span>/mo</span></div>
+        <div class="ps-rate">£3.50/class · 3 per week</div>
+      </div>
+      <div class="price-summary-item">
+        <h3>Intensive</h3>
+        <div class="ps-price">£60<span>/mo</span></div>
+        <div class="ps-rate">£3.00/class · 5 per week</div>
+      </div>
+    </div>
+
+    <div class="price-summary-extras">
+      <span>👨‍👩‍👧 Sibling: 10% off each additional child</span>
+      <span>⭐ Loyalty: 1–3 free classes on pre-pay</span>
+    </div>
+
+    <div class="price-summary-cta">
+      <a href="/pricing.html" class="btn btn-outline">See full pricing &amp; discounts →</a>
     </div>
   </div>
 </section>
@@ -856,7 +997,7 @@
     </div>
     <div class="faq-item">
       <h3>How much do online Quran classes cost in the UK?</h3>
-      <p>Our fees are competitive with other UK online Quran academies and depend on the number of classes per week and session length. Contact us for a clear breakdown with no hidden charges.</p>
+      <p>Plans start from <strong>£32 per month</strong> for 2 classes per week (£4 per 30-minute class). The Standard package is £42 per month for 3 classes per week (£3.50 per class), and the Intensive package is £60 per month for 5 classes per week (£3 per class). Sibling and loyalty discounts are available. <a href="/pricing.html" style="color:var(--gold);font-weight:600;">See full pricing →</a></p>
     </div>
     <div class="faq-item">
       <h3>How long does it take to learn to read the Quran with Tajweed?</h3>
@@ -903,9 +1044,20 @@
           <option>Qur'an Reading with Tajweed</option>
           <option>Hifz-ul-Qur'an</option>
           <option>Tafseer &amp; Islamic Studies</option>
+          <option>English Tarjuma &amp; Islamiat</option>
           <option>Sisters-Only Classes</option>
           <option>Adult Quran Classes</option>
           <option>Not sure yet — help me choose</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="package">Preferred Package</label>
+        <select id="package" name="preferred_package">
+          <option>Not sure — help me choose</option>
+          <option>Starter — £32/month · 2 classes per week</option>
+          <option>Standard — £42/month · 3 classes per week (Most popular)</option>
+          <option>Intensive — £60/month · 5 classes per week (Best value)</option>
+          <option>Sibling Package — 10% off each additional child</option>
         </select>
       </div>
       <div class="field">
@@ -951,7 +1103,10 @@
       <p style="margin-top:10px;">
         <a href="/courses/courses.html">Courses</a> ·
         <a href="/teachers.html">Our Teachers</a> ·
-        <a href="/online-quran-classes-london.html">Quran Classes London</a>
+        <a href="/pricing.html">Pricing</a> ·
+        <a href="/blog.html">Blogs</a> ·
+        <a href="/online-quran-classes-london.html">Quran Classes London</a> ·
+        <a href="/online-quran-classes-birmingham.html">Quran Classes Birmingham</a>
       </p>
     </div>
     <div>© <span id="year"></span> Almuallim. All rights reserved. · <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/terms-of-service.html">Terms of Service</a></div>
@@ -962,7 +1117,6 @@
   <a href="#contact" class="btn">Book Free Trial Class</a>
 </div>
 
-<!-- Floating WhatsApp -->
 <a class="almuallim-whatsapp" href="https://wa.me/923126333353?text=Assalamu%20Alaikum%2C%20I%20would%20like%20to%20enquire%20about%20Quran%20classes%20at%20Almuallim%20Academy." target="_blank" rel="noopener noreferrer" aria-label="Contact Almuallim Academy on WhatsApp" title="Contact us on WhatsApp">
   <svg viewBox="0 0 32 32" aria-hidden="true">
     <path d="M19.11 17.22c-.27-.14-1.59-.78-1.84-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.97 2.63 1.11 2.81c.14.18 1.9 2.9 4.6 4.07.64.28 1.14.44 1.53.56.64.2 1.22.17 1.68.1.51-.08 1.59-.65 1.81-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/>
@@ -1045,7 +1199,7 @@
     try { history.replaceState(null, '', href); } catch(err){}
   }, false);
 
-  /* ===== Form: AJAX submit with inline success + native fallback ===== */
+  /* Form: AJAX submit with inline success + native fallback */
   var form = document.getElementById('trialForm');
   if (form){
     var consent       = form.querySelector('#consent');
@@ -1075,7 +1229,6 @@
 
     form.addEventListener('submit', function(e){
       if (ajaxFailed) return;
-
       clearConsentError();
       if (consent && !consent.checked){
         e.preventDefault();
@@ -1083,15 +1236,12 @@
         showConsentError('Please tick the consent box before submitting the form.');
         return false;
       }
-
       e.preventDefault();
-
       var originalText = submitBtn ? submitBtn.textContent : '';
       if (submitBtn){
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending…';
       }
-
       fetch('https://formsubmit.co/ajax/almuallimacademy0@gmail.com', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
