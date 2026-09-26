@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
+  <!-- ===== HOMEPAGE ===== -->
   <url>
     <loc>https://almuallim.uk/</loc>
     <lastmod>2026-09-26</lastmod>
@@ -9,13 +10,7 @@
     <priority>1.0</priority>
   </url>
 
-  <url>
-    <loc>https://almuallim.uk/pricing.html</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
+  <!-- ===== COURSES HUB ===== -->
   <url>
     <loc>https://almuallim.uk/courses/courses.html</loc>
     <lastmod>2026-09-26</lastmod>
@@ -23,43 +18,53 @@
     <priority>0.95</priority>
   </url>
 
+  <!-- ===== INDIVIDUAL COURSE PAGES ===== -->
   <url>
     <loc>https://almuallim.uk/courses/noorani-qaida.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://almuallim.uk/courses/tajweed-rules.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://almuallim.uk/courses/hifz-programme.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://almuallim.uk/courses/islamic-studies.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://almuallim.uk/courses/sisters-classes.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://almuallim.uk/courses/adult-quran-classes.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
+  <!-- ===== PRICING ===== -->
+  <url>
+    <loc>https://almuallim.uk/pricing.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- ===== TEACHERS ===== -->
   <url>
     <loc>https://almuallim.uk/teachers.html</loc>
     <lastmod>2026-09-26</lastmod>
@@ -67,6 +72,92 @@
     <priority>0.85</priority>
   </url>
 
+  <!-- ===== BLOG INDEX ===== -->
+  <url>
+    <loc>https://almuallim.uk/blog.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ===== BLOG POSTS ===== -->
+  <url>
+    <loc>https://almuallim.uk/blog/benefits-of-learning-quran.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- Jab baaki blog posts likho, neeche wali lines uncomment karo: -->
+  <!--
+  <url>
+    <loc>https://almuallim.uk/blog/learn-quran-with-tajweed.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/tajweed-rules-for-beginners.html</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/noorani-qaida-beginners.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/how-long-to-learn-quran.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/best-age-to-start-quran.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/online-vs-madrasah.html</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/quran-for-kids-tips.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/surah-al-fatiha-explained.html</loc>
+    <lastmod>2026-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/adult-quran-learning.html</loc>
+    <lastmod>2026-12-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/female-quran-teacher-uk.html</loc>
+    <lastmod>2026-12-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/blog/choosing-online-quran-academy.html</loc>
+    <lastmod>2026-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  -->
+
+  <!-- ===== CITY PAGES ===== -->
   <url>
     <loc>https://almuallim.uk/online-quran-classes-london.html</loc>
     <lastmod>2026-09-26</lastmod>
@@ -79,23 +170,40 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- Jab nayi city pages banao, neeche wali lines uncomment karo: -->
+  <!--
+  <url>
+    <loc>https://almuallim.uk/online-quran-classes-manchester.html</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/online-quran-classes-leeds.html</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://almuallim.uk/online-quran-classes-glasgow.html</loc>
+    <lastmod>2026-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  -->
 
+  <!-- ===== LEGAL PAGES ===== -->
   <url>
     <loc>https://almuallim.uk/privacy-policy.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://almuallim.uk/terms-of-service.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  <url>
-    <loc>https://almuallim.uk/blog.html</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
+
 </urlset>
