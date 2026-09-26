@@ -1,0 +1,43 @@
+# ============================================
+# Almuallim — Jekyll Configuration
+# ============================================
+
+title: "Almuallim"
+description: "Online Quran Academy UK — 1:1 Tajweed, Hifz, Noorani Qaida & Islamic Studies"
+url: "https://almuallim.uk"
+baseurl: ""
+lang: "en-GB"
+
+author:
+  name: "Muallima Rabia Batool"
+  email: "info@almuallim.uk"
+
+# CLEAN URLs
+permalink: pretty
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Exclude from build
+exclude:
+  - .github/
+  - .gitignore
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+      lang: "en-GB"
+      author: "Muallima Rabia Batool"
