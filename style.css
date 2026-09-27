@@ -443,3 +443,15 @@ td.center{text-align:center;font-weight:600;color:var(--green-deep)}
 .blog-cta .cta-buttons{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 .blog-cta .btn-outline{color:var(--cream);border-color:var(--gold-bright)}
 .blog-cta .btn-outline:hover{background:var(--gold-bright);color:var(--green-deep)}
+/* Courses Hub — Course Cards */
+.course-grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:700px){.course-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.course-grid{grid-template-columns:repeat(3,1fr)}}
+.course-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--hairline);border-radius:8px;padding:30px 26px 26px;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.course-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(10,42,31,.1);border-color:var(--gold)}
+.course-card .card-num{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);line-height:1;margin-bottom:14px}
+.course-card h3{font-size:1.3rem;margin-bottom:10px}
+.course-card p{color:var(--ink-soft);font-size:.94rem;flex-grow:1;margin-bottom:18px}
+.course-card .card-meta{font-size:.76rem;color:var(--ink-soft);letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px;font-weight:600}
+.course-card .card-link{color:var(--green-deep);font-weight:600;font-size:.9rem;display:inline-flex;align-items:center;gap:6px;border-top:1px solid var(--hairline);padding-top:16px;transition:color .2s ease,gap .2s ease}
+.course-card:hover .card-link{color:var(--gold);gap:10px}
