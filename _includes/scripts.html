@@ -1,95 +1,59 @@
-<script>
-(function(){
-  "use strict";
-  var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  var hamburger = document.getElementById('hamburger');
-  var navlinks  = document.getElementById('navlinks');
-
-  function closeMenu(){
-    if (navlinks) navlinks.classList.remove('open');
-    if (hamburger){
-      hamburger.setAttribute('aria-expanded','false');
-      hamburger.setAttribute('aria-label','Open menu');
-    }
-  }
-
-  if (hamburger && navlinks){
-    hamburger.addEventListener('click', function(e){
-      e.preventDefault();e.stopPropagation();
-      var isOpen = navlinks.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    });
-    document.addEventListener('click', function(e){
-      if (!navlinks.classList.contains('open')) return;
-      if (navlinks.contains(e.target) || hamburger.contains(e.target)) return;
-      closeMenu();
-    });
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && navlinks.classList.contains('open')){closeMenu();hamburger.focus();}
+  /* ===== Go to top button ===== */
+  var goTop = document.querySelector('.go-top-btn');
+  if (goTop){
+    var toggleGoTop = function(){
+      if (window.pageYOffset > 500) goTop.classList.add('is-visible');
+      else goTop.classList.remove('is-visible');
+    };
+    window.addEventListener('scroll', toggleGoTop, {passive:true});
+    toggleGoTop();
+    goTop.addEventListener('click', function(){
+      try { window.scrollTo({top:0, behavior:'smooth'}); }
+      catch(err){ window.scrollTo(0,0); }
     });
   }
 
-  function headerOffset(){var h = document.querySelector('header');return h ? h.offsetHeight : 72;}
-  function scrollToId(id){
-    var target = document.getElementById(id);
-    if (!target) return;
-    var y = target.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - headerOffset() - 8;
-    if (y < 0) y = 0;
-    try { window.scrollTo({ top: y, behavior: 'smooth' }); } catch (err) { window.scrollTo(0, y); }
+  /* ===== Back button ===== */
+  var backBtn = document.querySelector('.nav-back-btn');
+  if (backBtn){
+    /* Hide if there's no page in history to go back to (opened directly) */
+    if (window.history.length <= 1) backBtn.style.display = 'none';
+    backBtn.addEventListener('click', function(){
+      if (window.history.length > 1) window.history.back();
+      else window.location.href = '/';
+    });
   }
-  document.addEventListener('click', function(e){
-    var el = e.target;if (!el || !el.closest) return;
-    var link = el.closest('a[href^="#"]');if (!link) return;
-    var href = link.getAttribute('href');
-    if (!href || href === '#' || href.length < 2) return;
-    var id = href.slice(1);
-    if (!document.getElementById(id)) return;
-    e.preventDefault();closeMenu();scrollToId(id);
-    try { history.replaceState(null, '', href); } catch(err){}
-  }, false);
 
-  var form = document.getElementById('trialForm');
-  if (form){
-    var consent = form.querySelector('#consent'),consentField = consent ? consent.closest('.consent-field') : null,consentError = form.querySelector('#consent-error');
-    var success = document.getElementById('form-success'),submitBtn = form.querySelector('button[type="submit"]'),ajaxFailed = false;
-    function showConsentError(msg){
-      if (consentError){consentError.textContent = msg;consentError.hidden = false;}
-      if (consentField){consentField.classList.remove('invalid');void consentField.offsetWidth;consentField.classList.add('invalid');}
-      if (consent) consent.focus();
-    }
-    function clearConsentError(){
-      if (consentError) consentError.hidden = true;
-      if (consentField) consentField.classList.remove('invalid');
-    }
-    if (consent){consent.addEventListener('change', function(){if (consent.checked) clearConsentError();});}
-    form.addEventListener('submit', function(e){
-      if (ajaxFailed) return;
-      clearConsentError();
-      if (consent && !consent.checked){
-        e.preventDefault();e.stopPropagation();
-        showConsentError('Please tick the consent box before submitting the form.');
-        return false;
-      }
-      e.preventDefault();
-      var originalText = submitBtn ? submitBtn.textContent : '';
-      if (submitBtn){submitBtn.disabled = true;submitBtn.textContent = 'Sending…';}
-      fetch('https://formsubmit.co/ajax/almuallimacademy0@gmail.com', {
-        method: 'POST',headers: { 'Accept': 'application/json' },body: new FormData(form)
-      })
-      .then(function(r){if (!r.ok) throw new Error('Request failed');return r.json();})
-      .then(function(){
-        form.hidden = true;
-        if (success){success.hidden = false;try { success.scrollIntoView({ behavior:'smooth', block:'center' }); } catch(err){}}
-      })
-      .catch(function(){
-        ajaxFailed = true;
-        if (submitBtn){submitBtn.disabled = false;submitBtn.textContent = originalText || 'Request Free Trial';}
-        form.submit();
-      });
-    }, true);
-  }
-})();
-</script>
+  /* ===== Inject decorative SVG into hero on pages without one ===== */
+  (function(){
+    var heroWrap = document.querySelector('.hero .wrap');
+    if (!heroWrap) return;
+    if (heroWrap.querySelector('.hero-visual')) return; /* already has one */
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('class', 'hero-visual hero-visual-float');
+    svg.setAttribute('viewBox', '0 0 300 320');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'An open Qur\'an resting on a wooden rehal stand');
+    svg.innerHTML =
+      '<defs><linearGradient id="pageGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFDF6"/><stop offset="100%" stop-color="#F1EBDA"/></linearGradient></defs>' +
+      '<circle cx="150" cy="175" r="128" fill="none" stroke="#C7A15C" stroke-opacity="0.18"/>' +
+      '<circle cx="150" cy="175" r="148" fill="none" stroke="#C7A15C" stroke-opacity="0.1"/>' +
+      '<g stroke="#C7A15C" stroke-width="1.4" fill="none" opacity="0.9"><path d="M150 52 C 162 58 168 70 166 82 C 165 92 158 100 148 103 C 156 96 160 87 159 78 C 158 66 154 58 150 52 Z"/><circle cx="150" cy="45" r="3" fill="#C7A15C" stroke="none"/></g>' +
+      '<g stroke="#8A5A2B" stroke-width="7" stroke-linecap="round"><line x1="64" y1="278" x2="222" y2="160"/><line x1="236" y1="278" x2="78" y2="160"/></g>' +
+      '<line x1="90" y1="224" x2="210" y2="224" stroke="#8A5A2B" stroke-width="4" stroke-linecap="round"/>' +
+      '<path d="M150 132 C 106 128 70 141 55 170 C 53 186 53 200 57 212 C 78 191 113 177 150 173 Z" fill="url(#pageGrad)" stroke="#123F2D" stroke-width="2.5"/>' +
+      '<path d="M150 132 C 194 128 230 141 245 170 C 247 186 247 200 243 212 C 222 191 187 177 150 173 Z" fill="url(#pageGrad)" stroke="#123F2D" stroke-width="2.5"/>' +
+      '<line x1="150" y1="130" x2="150" y2="174" stroke="#0A2A1F" stroke-width="3"/>' +
+      '<g stroke="#C7A15C" stroke-width="1.6" opacity="0.8"><line x1="72" y1="168" x2="132" y2="156"/><line x1="69" y1="181" x2="134" y2="167"/><line x1="67" y1="194" x2="136" y2="178"/></g>' +
+      '<g stroke="#C7A15C" stroke-width="1.6" opacity="0.8"><line x1="228" y1="168" x2="168" y2="156"/><line x1="231" y1="181" x2="166" y2="167"/><line x1="233" y1="194" x2="164" y2="178"/></g>';
+    heroWrap.appendChild(svg);
+  })();
+
+  /* ===== Hero float SVG (for hero-centered pages) ===== */
+  (function(){
+    var heroC = document.querySelector('.hero-centered .wrap');
+    if (!heroC) return;
+    if (heroC.querySelector('.hero-visual')) return;
+    heroC.classList.add('has-float-svg');
+  })();
