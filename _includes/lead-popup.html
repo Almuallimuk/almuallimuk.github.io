@@ -1,0 +1,110 @@
+<!-- Lead Capture Popup - Mobile & Desktop -->
+<div id="leadPopup" class="lead-popup-overlay" style="display:none;">
+  <div class="lead-popup-box">
+    <span class="lead-popup-close" onclick="closeLeadPopup()">&times;</span>
+    <h2>🎁 Free PDF Guide for UK Muslims!</h2>
+    <p>Enter your email below and download our exclusive guide instantly.</p>
+    
+    <!-- YAHAN BREVO KA IFRAME CODE PASTE KAREIN -->
+    <iframe width="540" height="305" src="https://c616f6f2.sibforms.com/v2/serve/MUIFAIYcSnM6RammpuV5SE3iDwy-HR0cbhUkkf30bcUx7GpwUPSATLFarWOhf9JOlJZddLqpRwz6-F5pXHzyVWF7tl2VD-ZBtPXVANfD1HgXhCRzgbejIiFz99olltnrs8rQ6zpzjQPfnTmjsRb8mTbym4hRl16NJj3PBdSvMDo_SYul4FHlGKuJlwz73HC_KYp6-FPdCe-kXWnLaQ==" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
+    
+  </div>
+</div>
+
+<style>
+.lead-popup-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+.lead-popup-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px 20px;
+  max-width: 450px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+.lead-popup-box h2 {
+  color: #1a5c3a;
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+.lead-popup-box p {
+  color: #555;
+  font-size: 14px;
+  margin: 0 0 15px;
+}
+.lead-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+}
+.lead-popup-close:hover {
+  color: #333;
+}
+/* Brevo form ko responsive banane ke liye */
+.lead-popup-box iframe {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+</style>
+
+<script>
+(function() {
+  var popup = document.getElementById('leadPopup');
+  var shown = false;
+
+  // Agar 7 din tak dekh chuka hai to nahi dikhana (localStorage)
+  var lastShown = localStorage.getItem('leadPopupLastShown');
+  if (lastShown) {
+    var days = (Date.now() - parseInt(lastShown)) / (1000 * 60 * 60 * 24);
+    if (days < 7) {
+      return; // 7 din se kam, popup na dikhao
+    }
+  }
+
+  function showPopup() {
+    if (shown) return;
+    shown = true;
+    popup.style.display = 'flex';
+    localStorage.setItem('leadPopupLastShown', Date.now().toString());
+  }
+
+  window.closeLeadPopup = function() {
+    popup.style.display = 'none';
+  };
+
+  // Desktop: exit intent (mouse bahar nikal jaye)
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY < 10) {
+      showPopup();
+    }
+  });
+
+  // Mobile: 15 second baad ya 50% scroll par
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (isMobile) {
+    setTimeout(showPopup, 15000);
+    window.addEventListener('scroll', function() {
+      var scrollPercent = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+      if (scrollPercent > 0.5) {
+        showPopup();
+      }
+    });
+  }
+})();
+</script>
