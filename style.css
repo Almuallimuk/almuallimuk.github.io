@@ -493,3 +493,9 @@ td.center{text-align:center;font-weight:600;color:var(--green-deep)}
   .almuallim-whatsapp{width:60px;height:60px;right:16px;bottom:88px;}
   .almuallim-whatsapp svg{width:33px;height:33px;}
 }
+/* Floating decorative SVG for hero-centered pages */
+.hero-centered .wrap{position:relative;}
+.hero-centered .hero-visual-float{position:absolute;top:20px;right:-40px;width:160px;opacity:0.18;pointer-events:none;z-index:0;}
+@media(max-width:900px){.hero-centered .hero-visual-float{width:120px;right:-20px;opacity:0.12;}}
+@media(max-width:640px){.hero-centered .hero-visual-float{display:none;}}
+.hero-centered .wrap > *{position:relative;z-index:1;}
