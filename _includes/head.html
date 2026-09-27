@@ -7,6 +7,7 @@
 <meta name="author" content="Almuallim Online Quran Academy">
 <meta name="theme-color" content="#0A2A1F">
 <meta name="geo.region" content="GB">
+<meta name="geo.placename" content="United Kingdom">
 
 <link rel="canonical" href="{{ site.url }}{{ page.url }}">
 
@@ -34,6 +35,76 @@
 
 <link rel="stylesheet" href="/style.css">
 
+<!-- ============================================================
+     SITE-WIDE SCHEMA (Organization + WebSite)
+     Har page pe automatically apply hoga
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://almuallim.uk/#organization",
+      "name": "Almuallim Online Quran Academy",
+      "alternateName": "Almuallim",
+      "url": "https://almuallim.uk",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://almuallim.uk/Logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://almuallim.uk/og-image.jpg",
+      "description": "Almuallim is a UK online Quran academy offering 1-to-1 Tajweed, Hifz, Noorani Qaida and Islamic Studies classes with qualified Dars-e-Nizami teachers.",
+      "email": "info@almuallim.uk",
+      "telephone": "+923126333353",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "areaServed": [
+        {"@type": "Country", "name": "United Kingdom"},
+        {"@type": "City", "name": "London"},
+        {"@type": "City", "name": "Birmingham"},
+        {"@type": "City", "name": "Manchester"},
+        {"@type": "City", "name": "Leeds"},
+        {"@type": "City", "name": "Glasgow"},
+        {"@type": "City", "name": "Liverpool"},
+        {"@type": "City", "name": "Sheffield"},
+        {"@type": "City", "name": "Bristol"},
+        {"@type": "City", "name": "Edinburgh"},
+        {"@type": "City", "name": "Cardiff"}
+      ],
+      "knowsLanguage": ["en", "ur", "ar"],
+      "sameAs": [
+        "https://wa.me/923126333353"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "email": "info@almuallim.uk",
+        "telephone": "+923126333353",
+        "availableLanguage": ["English", "Urdu"],
+        "areaServed": "GB"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://almuallim.uk/#website",
+      "url": "https://almuallim.uk",
+      "name": "Almuallim Online Quran Academy",
+      "description": "Online Quran academy teaching Noorani Qaida, Tajweed, Hifz and Islamic Studies to UK students.",
+      "publisher": {"@id": "https://almuallim.uk/#organization"},
+      "inLanguage": "en-GB"
+    }
+  ]
+}
+</script>
+
+<!-- ============================================================
+     PAGE-SPECIFIC SCHEMA (front matter se aata hai)
+     ============================================================ -->
 {% if page.schema %}
 {{ page.schema }}
 {% endif %}
