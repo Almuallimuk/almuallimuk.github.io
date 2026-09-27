@@ -455,3 +455,41 @@ td.center{text-align:center;font-weight:600;color:var(--green-deep)}
 .course-card .card-meta{font-size:.76rem;color:var(--ink-soft);letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px;font-weight:600}
 .course-card .card-link{color:var(--green-deep);font-weight:600;font-size:.9rem;display:inline-flex;align-items:center;gap:6px;border-top:1px solid var(--hairline);padding-top:16px;transition:color .2s ease,gap .2s ease}
 .course-card:hover .card-link{color:var(--gold);gap:10px}
+/* ===== Explore Strip (internal linking on every page) ===== */
+.explore-strip{background:#F3EEE0;padding:44px 0;border-top:1px solid var(--hairline);}
+.explore-strip h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;text-align:center;margin-bottom:24px;color:var(--green-deep);}
+.explore-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(min-width:700px){.explore-grid{grid-template-columns:repeat(4,1fr);gap:16px;}}
+.explore-card{display:flex;flex-direction:column;align-items:center;text-align:center;background:#fff;border:1px solid var(--hairline);border-radius:10px;padding:22px 16px;text-decoration:none;transition:border-color .2s ease,transform .15s ease,box-shadow .2s ease;}
+.explore-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 10px 24px rgba(10,42,31,.08);}
+.explore-card .ex-icon{width:42px;height:42px;border-radius:50%;background:rgba(199,161,92,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.explore-card .ex-icon svg{width:20px;height:20px;color:var(--gold);}
+.explore-card strong{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--green-deep);font-weight:600;display:block;margin-bottom:2px;}
+.explore-card span{font-size:0.82rem;color:var(--ink-soft);}
+
+/* ===== Back Button ===== */
+.nav-back-btn{position:fixed;left:22px;bottom:22px;width:52px;height:52px;background:#fff;border:1px solid var(--hairline);color:var(--green-deep);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9998;transition:transform .2s ease,background .2s ease,box-shadow .2s ease,border-color .2s ease;box-shadow:0 6px 18px rgba(10,42,31,0.12);}
+.nav-back-btn:hover{transform:scale(1.08);background:var(--green-deep);color:var(--gold-bright);border-color:var(--green-deep);}
+.nav-back-btn:active{transform:scale(0.94);}
+.nav-back-btn svg{width:22px;height:22px;}
+@media(max-width:859px){.nav-back-btn{left:16px;bottom:88px;width:48px;height:48px;}.nav-back-btn svg{width:20px;height:20px;}}
+
+/* ===== Go To Top Button ===== */
+.go-top-btn{position:fixed;right:22px;bottom:110px;width:52px;height:52px;background:var(--green-deep);border:1px solid var(--gold);color:var(--gold-bright);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9998;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease,visibility .3s ease,background .2s ease;box-shadow:0 8px 24px rgba(10,42,31,0.22);}
+.go-top-btn.is-visible{opacity:1;visibility:visible;transform:translateY(0);}
+.go-top-btn:hover{background:var(--gold);color:var(--green-deep);transform:translateY(-2px) scale(1.06);}
+.go-top-btn:active{transform:scale(0.94);}
+.go-top-btn svg{width:22px;height:22px;}
+@media(max-width:859px){.go-top-btn{right:16px;bottom:170px;width:48px;height:48px;}.go-top-btn svg{width:20px;height:20px;}}
+
+/* ===== WhatsApp (bigger, prettier) ===== */
+.almuallim-whatsapp{position:fixed;right:22px;bottom:22px;width:68px;height:68px;background:linear-gradient(145deg,#2be87a,#25D366 55%,#128C4A);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 26px rgba(18,140,74,0.42),0 0 0 3px rgba(255,255,255,0.6) inset;z-index:9999;transition:transform .25s ease,box-shadow .25s ease;position:fixed;}
+.almuallim-whatsapp:hover{transform:scale(1.1) rotate(4deg);box-shadow:0 12px 34px rgba(18,140,74,0.55),0 0 0 3px rgba(255,255,255,0.7) inset;}
+.almuallim-whatsapp:active{transform:scale(0.96);}
+.almuallim-whatsapp svg{width:38px;height:38px;fill:#fff;position:relative;z-index:2;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.15));}
+.almuallim-whatsapp .wa-pulse{position:absolute;inset:0;border-radius:50%;background:#25D366;opacity:0.5;z-index:0;animation:waPulse 2.4s ease-out infinite;}
+@keyframes waPulse{0%{transform:scale(1);opacity:0.45;}70%{transform:scale(1.7);opacity:0;}100%{transform:scale(1.7);opacity:0;}}
+@media (max-width:859px){
+  .almuallim-whatsapp{width:60px;height:60px;right:16px;bottom:88px;}
+  .almuallim-whatsapp svg{width:33px;height:33px;}
+}
