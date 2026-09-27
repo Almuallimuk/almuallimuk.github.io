@@ -5,15 +5,18 @@
     <button class="lead-popup-close" type="button" aria-label="Close popup" data-popup-close>✕</button>
 
     <div class="lead-popup-body">
-      <span class="lead-popup-arabic" lang="ar" dir="rtl">اقْرَأْ بِاسْمِ رَبِّكَ</span>
+      <span class="lead-popup-arabic" lang="ar" dir="rtl">وَقُل رَّبِّ زِدْنِي عِلْمًا</span>
 
       <h2 id="popupTitle" class="lead-popup-title">
-        Get Your Free PDF: 12 Benefits of Learning the Qur'an
+        A Precious Gift for You and Your Family
       </h2>
 
       <p class="lead-popup-text">
-        Backed by Qur'an and Hadith — a short guide for UK families considering Quran classes.
-        Enter your email and we'll send it instantly. No spam.
+        Don't miss the chance to secure your free Islamic book by Al-Muallim. A carefully curated set of <strong>10 beautiful Duas</strong> that every Muslim — from childhood to old age — should know.
+      </p>
+
+      <p class="lead-popup-text lead-popup-text-em">
+        Enter your email below to claim your free copy instantly.
       </p>
 
       <form class="lead-popup-form"
@@ -26,39 +29,40 @@
                placeholder="Your email address"
                autocomplete="email"
                class="lead-popup-input">
-        <button type="submit" class="btn lead-popup-btn">Send Me the PDF</button>
+        <button type="submit" class="btn lead-popup-btn">Claim Your Free Copy</button>
       </form>
 
       <p class="lead-popup-note">
-        We respect your privacy. Unsubscribe any time.
+        Free for every family. No spam — unsubscribe any time.
       </p>
     </div>
   </div>
 </div>
 
 <style>
-  /* Popup-specific styles */
   .lead-popup{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:'Inter',sans-serif}
   .lead-popup[hidden]{display:none}
   .lead-popup-overlay{position:absolute;inset:0;background:rgba(10,42,31,.72);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-  .lead-popup-inner{position:relative;background:#FBF7EC;border:1px solid rgba(199,161,92,.4);border-radius:14px;box-shadow:0 24px 60px rgba(10,42,31,.32);max-width:460px;width:100%;overflow:hidden;animation:popupIn .45s cubic-bezier(.34,1.56,.64,1)}
+  .lead-popup-inner{position:relative;background:#FBF7EC;border:1px solid rgba(199,161,92,.4);border-radius:14px;box-shadow:0 24px 60px rgba(10,42,31,.32);max-width:500px;width:100%;overflow:hidden;animation:popupIn .45s cubic-bezier(.34,1.56,.64,1)}
   @keyframes popupIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
   .lead-popup-close{position:absolute;top:12px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(199,161,92,.15);border:none;color:#0A2A1F;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s ease}
   .lead-popup-close:hover{background:rgba(199,161,92,.3)}
-  .lead-popup-body{padding:36px 32px 30px;text-align:center}
-  .lead-popup-arabic{display:block;font-family:'Amiri',serif;font-size:1.3rem;color:#C7A15C;margin-bottom:14px;direction:rtl}
-  .lead-popup-title{font-family:'Cormorant Garamond',serif;font-size:1.55rem;line-height:1.25;color:#0A2A1F;font-weight:600;margin:0 0 12px}
-  .lead-popup-text{font-size:.95rem;line-height:1.55;color:#4A564E;margin:0 0 22px}
-  .lead-popup-form{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+  .lead-popup-body{padding:38px 34px 30px;text-align:center}
+  .lead-popup-arabic{display:block;font-family:'Amiri',serif;font-size:1.35rem;color:#C7A15C;margin-bottom:16px;direction:rtl}
+  .lead-popup-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;line-height:1.22;color:#0A2A1F;font-weight:600;margin:0 0 18px}
+  .lead-popup-text{font-size:.94rem;line-height:1.65;color:#4A564E;margin:0 0 14px}
+  .lead-popup-text strong{color:#0A2A1F;font-weight:600}
+  .lead-popup-text-em{font-style:italic;color:#0A2A1F}
+  .lead-popup-form{display:flex;flex-direction:column;gap:10px;margin:22px 0 12px}
   .lead-popup-input{width:100%;padding:14px 16px;border:1px solid rgba(199,161,92,.4);background:#fff;border-radius:6px;font-size:1rem;color:#1C2620;font-family:'Inter',sans-serif;transition:border-color .2s ease}
   .lead-popup-input:focus{outline:none;border-color:#C7A15C}
   .lead-popup-btn{width:100%;padding:14px 20px;font-size:.98rem;border-radius:6px}
   .lead-popup-note{font-size:.76rem;color:#7A8279;margin:0;line-height:1.4}
 
   @media(max-width:520px){
-    .lead-popup-body{padding:32px 22px 24px}
-    .lead-popup-title{font-size:1.3rem}
-    .lead-popup-text{font-size:.9rem}
+    .lead-popup-body{padding:34px 22px 24px}
+    .lead-popup-title{font-size:1.32rem}
+    .lead-popup-text{font-size:.9rem;line-height:1.55}
     .lead-popup-arabic{font-size:1.15rem}
   }
 </style>
@@ -68,25 +72,33 @@
   var popup = document.getElementById('leadPopup');
   if (!popup) return;
 
-  var KEY = 'almuallim_popup_shown';
-  var DELAY = 12000; // 12 seconds
-  var COOLDOWN = 7 * 24 * 60 * 60 * 1000; // 7 days
+  var STORAGE_KEY = 'almuallim_popup_last_shown';
+  var COOLDOWN_MS = 24 * 60 * 60 * 1000;
+  var MIN_TIME_ON_PAGE = 6 * 1000;
+  var MOBILE_TIME_TRIGGER = 30 * 1000;
+  var SCROLL_DEPTH = 0.55;
+
+  var pageOpenedAt = Date.now();
+  var isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var shown = false;
+  var tabSwitchedAway = false;
 
   var lastShown = 0;
-  try { lastShown = parseInt(localStorage.getItem(KEY) || '0', 10); } catch(e){}
+  try { lastShown = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10); } catch(e){}
+  if (Date.now() - lastShown < COOLDOWN_MS) return;
 
   function openPopup(){
+    if (shown) return;
+    if (Date.now() - pageOpenedAt < MIN_TIME_ON_PAGE) return;
+    shown = true;
     popup.hidden = false;
     document.body.style.overflow = 'hidden';
-    try { localStorage.setItem(KEY, Date.now().toString()); } catch(e){}
+    try { localStorage.setItem(STORAGE_KEY, Date.now().toString()); } catch(e){}
   }
+
   function closePopup(){
     popup.hidden = true;
     document.body.style.overflow = '';
-  }
-
-  if (Date.now() - lastShown > COOLDOWN) {
-    setTimeout(openPopup, DELAY);
   }
 
   popup.querySelectorAll('[data-popup-close]').forEach(function(el){
@@ -94,6 +106,34 @@
   });
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && !popup.hidden) closePopup();
+  });
+
+  if (!isMobile) {
+    document.addEventListener('mouseout', function(e){
+      if (e.clientY <= 0 && !e.relatedTarget) openPopup();
+    });
+    document.addEventListener('mouseleave', function(e){
+      if (e.clientY <= 0) openPopup();
+    });
+  }
+
+  var scrollFired = false;
+  window.addEventListener('scroll', function(){
+    if (scrollFired || shown) return;
+    var scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+    if (scrolled >= SCROLL_DEPTH) {
+      scrollFired = true;
+      openPopup();
+    }
+  }, {passive:true});
+
+  if (isMobile) {
+    setTimeout(function(){ if (!shown) openPopup(); }, MOBILE_TIME_TRIGGER);
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'hidden' && !shown) tabSwitchedAway = true;
+    if (document.visibilityState === 'visible' && tabSwitchedAway && !shown) openPopup();
   });
 })();
 </script>
