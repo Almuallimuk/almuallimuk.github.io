@@ -54,6 +54,10 @@
     .testi span{font-size:.78rem;color:#DDB86B;font-weight:600}
 
     .nav-cta ~ .nav-cta{display:none !important}
+
+    /* Kill hero-centered CSS so JS can take over */
+    .hero-centered .wrap{max-width:none !important;text-align:left !important}
+    .hero-centered .hero-ctas,.hero-centered .trust-row{justify-content:flex-start !important}
   `;
   document.head.appendChild(cssFix);
 
@@ -73,8 +77,7 @@
   }
 
   /* ============================================================
-     4. FORCE SAME HERO LAYOUT on every page
-     Text LEFT, SVG RIGHT. Nothing can override.
+     4. SAME HERO LAYOUT on every page
      ============================================================ */
 
   function makeSVG(){
@@ -102,35 +105,33 @@
     if (!section) return;
     var wrap = section.querySelector('.wrap') || section;
 
-    // -------- 1. Content wrapper banao --------
-    var content = wrap.querySelector('.fade-in');
+    // -------- 1. Content wrapper identify / create --------
+    // Agar .wrap khud .fade-in hai (broken case), use alag karo
+    if (wrap.classList.contains('fade-in')) {
+      wrap.classList.remove('fade-in');
+    }
+
+    var content = null;
+    // Sirf direct children mein dhundo
+    for (var i = 0; i < wrap.children.length; i++) {
+      if (wrap.children[i].classList && wrap.children[i].classList.contains('fade-in')) {
+        content = wrap.children[i];
+        break;
+      }
+    }
+
+    // Agar nahi mila — naya wrapper banao aur sab kuch us mein daalo
     if (!content) {
-      // Pehle dekho ke koi wrapper hai jiske andar h1 hai
-      var h1 = wrap.querySelector('h1');
-      if (h1) {
-        // H1 ka parent dhoondo (agar woh direct .wrap ka child hai toh naya wrapper banao)
-        if (h1.parentElement === wrap) {
-          content = document.createElement('div');
-          content.className = 'fade-in';
-          var kids = Array.prototype.slice.call(wrap.children).filter(function(c){
-            return !c.classList.contains('hero-visual');
-          });
-          kids.forEach(function(c){ content.appendChild(c); });
-          wrap.appendChild(content);
-        } else {
-          content = h1.parentElement;
-          // Agar content wrapper .wrap ke barabar hai toh naya banao
-          if (content === wrap) {
-            content = document.createElement('div');
-            content.className = 'fade-in';
-            var kids2 = Array.prototype.slice.call(wrap.children).filter(function(c){
-              return !c.classList.contains('hero-visual');
-            });
-            kids2.forEach(function(c){ content.appendChild(c); });
-            wrap.appendChild(content);
-          }
+      content = document.createElement('div');
+      content.className = 'fade-in';
+      var kids = [];
+      for (var j = 0; j < wrap.children.length; j++) {
+        if (!wrap.children[j].classList.contains('hero-visual')) {
+          kids.push(wrap.children[j]);
         }
       }
+      kids.forEach(function(c){ content.appendChild(c); });
+      wrap.appendChild(content);
     }
 
     // -------- 2. Force grid on wrap --------
@@ -138,6 +139,9 @@
     wrap.style.setProperty('direction', 'ltr', 'important');
     wrap.style.setProperty('align-items', 'center', 'important');
     wrap.style.setProperty('text-align', 'left', 'important');
+    wrap.style.setProperty('max-width', '1120px', 'important');
+    wrap.style.setProperty('margin-left', 'auto', 'important');
+    wrap.style.setProperty('margin-right', 'auto', 'important');
 
     if (window.innerWidth >= 860) {
       wrap.style.setProperty('grid-template-columns', '1.15fr .85fr', 'important');
@@ -148,18 +152,31 @@
     }
 
     // -------- 3. Force content left-aligned --------
-    if (content) {
-      content.style.setProperty('text-align', 'left', 'important');
-      content.style.setProperty('direction', 'ltr', 'important');
-      content.style.setProperty('grid-column', '1', 'important');
+    content.style.setProperty('text-align', 'left', 'important');
+    content.style.setProperty('direction', 'ltr', 'important');
+    content.style.setProperty('grid-column', '1', 'important');
+    content.style.setProperty('max-width', 'none', 'important');
+    content.style.setProperty('margin-left', '0', 'important');
+    content.style.setProperty('margin-right', '0', 'important');
 
-      var ctas = content.querySelector('.hero-ctas');
-      var trust = content.querySelector('.trust-row');
-      if (ctas) ctas.style.setProperty('justify-content', 'flex-start', 'important');
-      if (trust) trust.style.setProperty('justify-content', 'flex-start', 'important');
-    }
+    // Har text element pe left-align force karo
+    var textEls = content.querySelectorAll('h1, h2, h3, h4, h5, h6, p, .lede, .eyebrow-ar, .hero-ctas, .trust-row, .course-facts, .quick-answer, .author-line');
+    textEls.forEach(function(el){
+      var isArabic = el.classList.contains('arabic') || el.getAttribute('dir') === 'rtl' || el.classList.contains('eyebrow-ar');
+      if (isArabic) {
+        el.style.setProperty('margin-left', '0', 'important');
+        el.style.setProperty('margin-right', 'auto', 'important');
+      } else {
+        el.style.setProperty('text-align', 'left', 'important');
+        el.style.setProperty('margin-left', '0', 'important');
+        el.style.setProperty('margin-right', '0', 'important');
+      }
+      if (el.classList.contains('hero-ctas') || el.classList.contains('trust-row') || el.classList.contains('course-facts')) {
+        el.style.setProperty('justify-content', 'flex-start', 'important');
+      }
+    });
 
-    // -------- 4. SVG add karo (agar nahi hai) --------
+    // -------- 4. SVG add karo --------
     var svg = wrap.querySelector('.hero-visual');
     if (!svg) {
       svg = makeSVG();
@@ -188,7 +205,6 @@
   var heroSelectors = '.hero, .course-hero, .hero-centered, .page-hero, .post-hero, .blog-hero, .blog-post-hero';
   var heroes = document.querySelectorAll(heroSelectors);
 
-  // Fallback: agar koi hero class nahi mili, toh pehla section jo h1 rakhta hai
   if (heroes.length === 0) {
     var firstH1 = document.querySelector('main h1, h1');
     if (firstH1) {
@@ -209,7 +225,7 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ============================================================
-     6. HAMBURGER MENU
+     6. HAMBURGER
      ============================================================ */
   var hamburger = document.getElementById('hamburger');
   var navlinks  = document.getElementById('navlinks');
