@@ -1,0 +1,55 @@
+{% comment %}
+  Usage on any page:
+  {% include hero.html
+     arabic="وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا"
+     heading="Learn Qur'an online with Tajweed, Hifz & Noorani Qaida"
+     lede="Almuallim connects students across the UK..."
+     cta_primary="Book a Free Trial Class"
+     cta_primary_url="#contact"
+     cta_secondary="See Pricing"
+     cta_secondary_url="/pricing/"
+     trust_1_num="1:1"     trust_1_label="Personalised online classes"
+     trust_2_num="From £32" trust_2_label="Per month"
+     trust_3_num="Free"     trust_3_label="Trial class, no card required"
+  %}
+{% endcomment %}
+
+<section class="hero">
+  <div class="wrap">
+    <div class="fade-in">
+      {% if include.arabic %}
+        <span class="eyebrow-ar" lang="ar" dir="rtl">{{ include.arabic }}</span>
+      {% endif %}
+
+      <h1>{{ include.heading }}</h1>
+
+      {% if include.lede %}
+        <p class="lede">{{ include.lede }}</p>
+      {% endif %}
+
+      {% if include.cta_primary %}
+        <div class="hero-ctas">
+          <a href="{{ include.cta_primary_url | default: '#contact' }}" class="btn">
+            {{ include.cta_primary }}
+          </a>
+          {% if include.cta_secondary %}
+            <a href="{{ include.cta_secondary_url | default: '/pricing/' }}" class="btn btn-outline">
+              {{ include.cta_secondary }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if include.trust_1_num %}
+        <div class="trust-row">
+          <div><strong>{{ include.trust_1_num }}</strong>{{ include.trust_1_label }}</div>
+          <div><strong>{{ include.trust_2_num }}</strong>{{ include.trust_2_label }}</div>
+          <div><strong>{{ include.trust_3_num }}</strong>{{ include.trust_3_label }}</div>
+        </div>
+      {% endif %}
+    </div>
+
+    {% comment %} 👇 SVG — har page pe automatic aa jayega {% endcomment %}
+    {% include hero-visual.html %}
+  </div>
+</section>
