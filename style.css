@@ -359,3 +359,9 @@ footer a:hover{opacity:1;color:var(--gold-bright)}
 .extra-card .x-badge{display:inline-block;background:var(--green-deep);color:var(--cream);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;padding:4px 11px;border-radius:999px}
 .extra-card .x-badge.gold{background:var(--gold);color:var(--green-deep)}
 td.center{text-align:center;font-weight:600;color:var(--green-deep)}
+
+/* Hero — single column (for pages without SVG) */
+.hero-centered .wrap{grid-template-columns:1fr !important;max-width:820px;margin:0 auto;text-align:center}
+.hero-centered .hero-ctas,.hero-centered .trust-row{justify-content:center}
+.hero-centered .eyebrow-ar{text-align:center}
+.hero-centered h1,.hero-centered .lede{margin-left:auto;margin-right:auto}
