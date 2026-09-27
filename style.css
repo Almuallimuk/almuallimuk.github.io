@@ -985,3 +985,102 @@ footer a:hover{opacity:1;color:var(--gold-bright)}
   *{animation:none !important;transition:none !important}
   .almuallim-whatsapp::after{animation:none}
 }
+/* =========================================================
+   ADDENDUM — Breadcrumb + Course hero (subpages)
+   ========================================================= */
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb{
+  font-size:.83rem;
+  color:var(--ink-soft);
+  padding:20px 0 0;
+}
+.breadcrumb ol{
+  list-style:none;          /* 👈 numbers chhupayega */
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:center;
+  padding:0;
+  margin:0;
+}
+.breadcrumb li{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.breadcrumb a{color:var(--gold);font-weight:500}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb [aria-current="page"]{color:var(--ink-soft)}
+.breadcrumb .sep{opacity:.4}
+
+/* ---------- Course hero ---------- */
+.course-hero{
+  position:relative;
+  padding:32px 0 52px;
+  overflow:hidden;
+}
+.course-hero::before{
+  content:"";
+  position:absolute;
+  inset:-20% -10% auto -10%;
+  height:420px;
+  background:radial-gradient(60% 60% at 30% 20%,rgba(46,125,84,.14),transparent 70%);
+  pointer-events:none;
+}
+.course-hero .wrap{position:relative}
+.course-hero h1{margin-bottom:16px}
+.course-hero .lede{
+  color:var(--ink-soft);
+  font-size:1.05rem;
+  max-width:60ch;
+  margin-bottom:26px;
+}
+
+/* Course facts — "Ages 5+ / 4-8 mo / 2-3× / 1:1" */
+.course-facts{
+  display:flex;
+  gap:24px;
+  flex-wrap:wrap;
+  margin-top:30px;
+  border-top:1px solid var(--hairline);
+  padding-top:22px;
+}
+.course-facts div{
+  font-size:.8rem;
+  color:var(--ink-soft);
+}
+.course-facts strong{
+  display:block;             /* 👈 line break force karega */
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.45rem;
+  color:var(--green-deep);
+  font-weight:600;
+  line-height:1.15;
+}
+
+/* Course hero — SVG positioning (agar add karo) */
+.course-hero .hero-visual{
+  width:100%;
+  max-width:220px;
+  margin:24px auto 0;
+}
+@media(min-width:860px){
+  .course-hero{padding:56px 0 72px}
+  .course-hero .wrap{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:60px;
+    align-items:center;
+  }
+  .course-hero .wrap > *:not(.hero-visual){
+    grid-column:1;
+  }
+  .course-hero .hero-visual{
+    grid-column:2;
+    grid-row:1 / span 20;
+    max-width:300px;
+    margin:0;
+    justify-self:end;
+  }
+}
