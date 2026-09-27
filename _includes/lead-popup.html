@@ -1,139 +1,99 @@
-<!-- Lead Capture Popup - Mobile & Desktop -->
-<div id="leadPopup" class="lead-popup-overlay" style="display:none;">
-  <div class="lead-popup-box">
-    <span class="lead-popup-close" onclick="closeLeadPopup()">&times;</span>
-   <h2 style="color: #1a5c3a; font-size: 22px; margin-bottom: 10px;">A Precious Gift for You and Your Family.</h2>
-    <p style="font-size: 15px; color: #444; line-height: 1.6; margin-bottom: 15px;">
-      Don't miss the chance to secure your <strong>free Islamic book by Al-Muallim</strong>. A carefully curated set of 10 beautiful Duas that every Muslim—from childhood to old age—should know.
-    </p>
-    <p style="font-size: 14px; color: #555; margin-bottom: 20px;">
-      Enter your email below to claim your free copy instantly.
-    </p>
-(Isme maine thori si inline CSS bhi laga di hai taake mobile aur desktop dono par ye text bohot khoobsurat aur readable lage).
+<div id="leadPopup" class="lead-popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" hidden>
+  <div class="lead-popup-overlay" data-popup-close></div>
 
-✅ Ab Kya Karna Hai:
-GitHub par _includes/lead-popup.html file edit karo.
+  <div class="lead-popup-inner">
+    <button class="lead-popup-close" type="button" aria-label="Close popup" data-popup-close>✕</button>
 
-Purana text hata kar ye naya paste karo.
+    <div class="lead-popup-body">
+      <span class="lead-popup-arabic" lang="ar" dir="rtl">اقْرَأْ بِاسْمِ رَبِّكَ</span>
 
-Commit changes dabao.
+      <h2 id="popupTitle" class="lead-popup-title">
+        Get Your Free PDF: 12 Benefits of Learning the Qur'an
+      </h2>
 
-⚠️ Ek Zaroori Kaam (PDF Ka Masla)
-Bhai, aapne bataya tha ke PDF khulne ke baad website ghaib ho jati hai. Uska hal humein Thank You Page ke zariye karna hai.
+      <p class="lead-popup-text">
+        Backed by Qur'an and Hadith — a short guide for UK families considering Quran classes.
+        Enter your email and we'll send it instantly. No spam.
+      </p>
 
-Agar aapne abhi tak thank-you.html file nahi banayi, to pehle wo bana lein (pichle message mein maine iska code diya tha). Uske baad Brevo mein Redirect URL ko https://almuallim.uk/thank-you.html set kar dein.
+      <form class="lead-popup-form"
+            action="YOUR_BREVO_FORM_ACTION_URL"
+            method="POST"
+            target="_blank">
+        <input type="email"
+               name="EMAIL"
+               required
+               placeholder="Your email address"
+               autocomplete="email"
+               class="lead-popup-input">
+        <button type="submit" class="btn lead-popup-btn">Send Me the PDF</button>
+      </form>
 
-Is se jab user email daalega, wo Thank You page par jayega, wahan se PDF nayi window mein khulegi, aur website bhi peeche salamat rahegi.
-
-📌 Ab Mujhe Batao
-Jab aap ye dono kaam (popup text aur Thank You page) kar lein, mujhe batao:
-
-"Popup text lag gaya aur Thank You page bhi ban gaya"
-
-Phir hum apne aakhri aur sabse mazedaar step ki taraf barhenge: AI Bot aur GitHub Actions lagana, taake har mahine khud ba khud emails jayein! 🎯
-
-
-    
-    <!-- YAHAN BREVO KA IFRAME CODE PASTE KAREIN -->
-    <iframe width="540" height="305" src="https://c616f6f2.sibforms.com/v2/serve/MUIFAIYcSnM6RammpuV5SE3iDwy-HR0cbhUkkf30bcUx7GpwUPSATLFarWOhf9JOlJZddLqpRwz6-F5pXHzyVWF7tl2VD-ZBtPXVANfD1HgXhCRzgbejIiFz99olltnrs8rQ6zpzjQPfnTmjsRb8mTbym4hRl16NJj3PBdSvMDo_SYul4FHlGKuJlwz73HC_KYp6-FPdCe-kXWnLaQ==" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
-    
+      <p class="lead-popup-note">
+        We respect your privacy. Unsubscribe any time.
+      </p>
+    </div>
   </div>
 </div>
 
 <style>
-.lead-popup-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-}
-.lead-popup-box {
-  background: #fff;
-  border-radius: 16px;
-  padding: 25px 20px;
-  max-width: 450px;
-  width: 100%;
-  position: relative;
-  text-align: center;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-}
-.lead-popup-box h2 {
-  color: #1a5c3a;
-  font-size: 20px;
-  margin: 0 0 10px;
-}
-.lead-popup-box p {
-  color: #555;
-  font-size: 14px;
-  margin: 0 0 15px;
-}
-.lead-popup-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #999;
-  cursor: pointer;
-  line-height: 1;
-}
-.lead-popup-close:hover {
-  color: #333;
-}
-/* Brevo form ko responsive banane ke liye */
-.lead-popup-box iframe {
-  max-width: 100% !important;
-  width: 100% !important;
-}
+  /* Popup-specific styles */
+  .lead-popup{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:'Inter',sans-serif}
+  .lead-popup[hidden]{display:none}
+  .lead-popup-overlay{position:absolute;inset:0;background:rgba(10,42,31,.72);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+  .lead-popup-inner{position:relative;background:#FBF7EC;border:1px solid rgba(199,161,92,.4);border-radius:14px;box-shadow:0 24px 60px rgba(10,42,31,.32);max-width:460px;width:100%;overflow:hidden;animation:popupIn .45s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes popupIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+  .lead-popup-close{position:absolute;top:12px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(199,161,92,.15);border:none;color:#0A2A1F;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s ease}
+  .lead-popup-close:hover{background:rgba(199,161,92,.3)}
+  .lead-popup-body{padding:36px 32px 30px;text-align:center}
+  .lead-popup-arabic{display:block;font-family:'Amiri',serif;font-size:1.3rem;color:#C7A15C;margin-bottom:14px;direction:rtl}
+  .lead-popup-title{font-family:'Cormorant Garamond',serif;font-size:1.55rem;line-height:1.25;color:#0A2A1F;font-weight:600;margin:0 0 12px}
+  .lead-popup-text{font-size:.95rem;line-height:1.55;color:#4A564E;margin:0 0 22px}
+  .lead-popup-form{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+  .lead-popup-input{width:100%;padding:14px 16px;border:1px solid rgba(199,161,92,.4);background:#fff;border-radius:6px;font-size:1rem;color:#1C2620;font-family:'Inter',sans-serif;transition:border-color .2s ease}
+  .lead-popup-input:focus{outline:none;border-color:#C7A15C}
+  .lead-popup-btn{width:100%;padding:14px 20px;font-size:.98rem;border-radius:6px}
+  .lead-popup-note{font-size:.76rem;color:#7A8279;margin:0;line-height:1.4}
+
+  @media(max-width:520px){
+    .lead-popup-body{padding:32px 22px 24px}
+    .lead-popup-title{font-size:1.3rem}
+    .lead-popup-text{font-size:.9rem}
+    .lead-popup-arabic{font-size:1.15rem}
+  }
 </style>
 
 <script>
-(function() {
+(function(){
   var popup = document.getElementById('leadPopup');
-  var shown = false;
+  if (!popup) return;
 
-  // Agar 7 din tak dekh chuka hai to nahi dikhana (localStorage)
-  var lastShown = localStorage.getItem('leadPopupLastShown');
-  if (lastShown) {
-    var days = (Date.now() - parseInt(lastShown)) / (1000 * 60 * 60 * 24);
-    if (days < 7) {
-      return; // 7 din se kam, popup na dikhao
-    }
+  var KEY = 'almuallim_popup_shown';
+  var DELAY = 12000; // 12 seconds
+  var COOLDOWN = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+  var lastShown = 0;
+  try { lastShown = parseInt(localStorage.getItem(KEY) || '0', 10); } catch(e){}
+
+  function openPopup(){
+    popup.hidden = false;
+    document.body.style.overflow = 'hidden';
+    try { localStorage.setItem(KEY, Date.now().toString()); } catch(e){}
+  }
+  function closePopup(){
+    popup.hidden = true;
+    document.body.style.overflow = '';
   }
 
-  function showPopup() {
-    if (shown) return;
-    shown = true;
-    popup.style.display = 'flex';
-    localStorage.setItem('leadPopupLastShown', Date.now().toString());
+  if (Date.now() - lastShown > COOLDOWN) {
+    setTimeout(openPopup, DELAY);
   }
 
-  window.closeLeadPopup = function() {
-    popup.style.display = 'none';
-  };
-
-  // Desktop: exit intent (mouse bahar nikal jaye)
-  document.addEventListener('mouseleave', function(e) {
-    if (e.clientY < 10) {
-      showPopup();
-    }
+  popup.querySelectorAll('[data-popup-close]').forEach(function(el){
+    el.addEventListener('click', closePopup);
   });
-
-  // Mobile: 15 second baad ya 50% scroll par
-  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  if (isMobile) {
-    setTimeout(showPopup, 15000);
-    window.addEventListener('scroll', function() {
-      var scrollPercent = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
-      if (scrollPercent > 0.5) {
-        showPopup();
-      }
-    });
-  }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !popup.hidden) closePopup();
+  });
 })();
 </script>
