@@ -115,6 +115,49 @@ description: "Take a free 2-minute level check for Qur'an Reading & Tajweed or I
   </div>
 </section>
 
-<!-- ============ QUIZ + RESULT (Step 3 mein fill honge) ============ -->
-<div id="quizRoot" hidden></div>
-<div id="resultRoot" hidden></div>
+<!-- ============ QUIZ ============ -->
+<section id="quizRoot" class="quiz-wrap" hidden>
+  <div class="wrap">
+
+    <!-- Top bar: progress + exit -->
+    <div class="quiz-top">
+      <button type="button" class="quiz-exit" id="quizExit" aria-label="Back to courses">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Exit</span>
+      </button>
+      <div class="quiz-course-name" id="quizCourseName">Qur'an Reading &amp; Tajweed</div>
+    </div>
+
+    <!-- Progress -->
+    <div class="quiz-progress" aria-hidden="true">
+      <div class="quiz-progress-track">
+        <span class="quiz-progress-fill" id="progressFill"></span>
+      </div>
+      <div class="quiz-progress-label">
+        <span id="stageLabel">Stage 1</span>
+        <span>Question <span id="qCurrent">1</span> of <span id="qTotal">5</span></span>
+      </div>
+    </div>
+
+    <!-- Question card -->
+    <div class="quiz-card">
+      <div class="quiz-topic" id="qTopic">Topic</div>
+      <h2 class="quiz-question" id="qText">Question will appear here</h2>
+      <div class="quiz-options" id="qOptions" role="radiogroup"></div>
+      <div class="quiz-feedback" id="qFeedback" hidden></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ RESULT ============ -->
+<section id="resultRoot" class="quiz-wrap" hidden>
+  <div class="wrap" id="resultInner">
+    <!-- JS will fill this -->
+  </div>
+</section>
+
+<!-- Load quiz engine -->
+<script src="/assets/js/level-check.js" defer></script>
