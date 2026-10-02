@@ -133,46 +133,42 @@
     if (choose) choose.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  /* ============ QUIZ FLOW ============ */
+ async function startCourse(courseKey) {
+  state.course = courseKey;
+  state.stage = 1;
+  state.answers = [];
+  state.qIndex = 0;
+  state.stage1Score = 0;
+  state.bank = null;
 
-  async function startCourse(courseKey) {
-    state.course = courseKey;
-    state.stage = 1;
-    state.answers = [];
-    state.qIndex = 0;
-    state.stage1Score = 0;
+  // Show quiz section
+  if (el.chooseCourse) el.chooseCourse.hidden = true;
+  if (el.quizRoot) el.quizRoot.hidden = false;
+  if (el.resultRoot) el.resultRoot.hidden = true;
+  el.quizCourseName.textContent = CONFIG.COURSES[courseKey].name;
 
-    // Show loading
-    if (el.chooseCourse) el.chooseCourse.hidden = true;
-    if (el.quizRoot) el.quizRoot.hidden = false;
-    if (el.resultRoot) el.resultRoot.hidden = true;
-    el.quizCourseName.textContent = CONFIG.COURSES[courseKey].name;
-    el.qOptions.innerHTML = "";
-    el.qFeedback.hidden = true;
-    el.qText.textContent = "";
-    el.qTopic.textContent = "";
-    el.quizRoot.querySelector(".quiz-card").innerHTML =
-      '<div class="quiz-loading"><div class="spinner"></div>Loading questions…</div>';
-    window.scrollTo({ top: el.quizRoot.offsetTop - 100, behavior: "smooth" });
+  // Show loading INSIDE the card body (don't destroy the card)
+  el.qTopic.textContent = "";
+  el.qText.innerHTML = '<span style="color:var(--ink-soft);font-size:.95rem;">Loading questions…</span>';
+  el.qOptions.innerHTML = "";
+  el.qFeedback.hidden = true;
 
-    // Fetch bank
-    try {
-      if (!state.bank) {
-        const res = await fetch(CONFIG.DATA[courseKey], { cache: "force-cache" });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        state.bank = await res.json();
-      }
-      // Restore quiz card DOM (in case we replaced it with loading)
-      restoreQuizCardDOM();
-      beginStage(1);
-    } catch (err) {
-      console.error("Failed to load questions:", err);
-      el.quizRoot.querySelector(".wrap").innerHTML =
-        '<div class="quiz-error"><h3>We couldn\'t load the questions</h3>' +
-        '<p>Please check your connection and try again.</p>' +
-        '<button type="button" class="btn" onclick="location.reload()">Reload</button></div>';
-    }
+  window.scrollTo({ top: el.quizRoot.offsetTop - 100, behavior: "smooth" });
+
+  // Fetch bank
+  try {
+    const res = await fetch(CONFIG.DATA[courseKey], { cache: "force-cache" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    state.bank = await res.json();
+
+    // Now start the quiz
+    beginStage(1);
+  } catch (err) {
+    console.error("Failed to load questions:", err);
+    el.qText.innerHTML = '<span style="color:#B3261E;">We couldn\'t load the questions. Please check your connection and try again.</span>';
+    el.qOptions.innerHTML = '<button type="button" class="btn" onclick="location.reload()">Reload</button>';
   }
+}
 
   function restoreQuizCardDOM() {
     // Rebuild quiz card if it was replaced with loading
