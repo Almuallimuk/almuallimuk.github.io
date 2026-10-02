@@ -12,8 +12,9 @@
     STAGE1_ADVANCE_MIN: 4,
     STAGE2_ADVANCED_MIN: 4,
     DATA: {
-      quran: "/assets/data/questions-quran.json",
-      islam: "/assets/data/questions-islam.json"
+      // Yahan jsDelivr CDN ke links laga diye hain
+      quran: "https://cdn.jsdelivr.net/gh/Almuallimuk/almuallimuk.github.io@main/assets/data/questions-quran.json",
+      islam: "https://cdn.jsdelivr.net/gh/Almuallimuk/almuallimuk.github.io@main/assets/data/questions-islam.json"
     },
     COURSES: {
       quran: {
@@ -156,7 +157,8 @@
     window.scrollTo({ top: el.quizRoot.offsetTop - 100, behavior: "smooth" });
 
     try {
-      const res = await fetch(CONFIG.DATA[courseKey], { cache: "force-cache" });
+      // Yahan cache force-cache hata diya hai taake fresh data load ho
+      const res = await fetch(CONFIG.DATA[courseKey]);
       if (!res.ok) throw new Error("HTTP " + res.status);
       const data = await res.json();
       if (!Array.isArray(data)) throw new Error("Bank is not an array");
