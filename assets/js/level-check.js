@@ -257,14 +257,19 @@
     const allBtns = el.qOptions.querySelectorAll(".quiz-option");
     allBtns.forEach(function (btn, i) {
       btn.disabled = true;
+      btn.setAttribute("aria-checked", "false");
+
       if (i === q.answer) {
-        btn.style.borderColor = "var(--green-light)";
-        btn.style.background = "rgba(46,125,84,.1)";
+        btn.classList.add("correct");
       } else if (i === chosenIdx && !isCorrect) {
-        btn.style.borderColor = "#C77A5C";
-        btn.style.background = "rgba(199,90,60,.08)";
+        btn.classList.add("wrong");
       }
     });
+
+    // mark the chosen one as selected for a moment
+    if (allBtns[chosenIdx]) {
+      allBtns[chosenIdx].setAttribute("aria-checked", "true");
+    }
 
     state.answers.push({
       questionId: q.id,
@@ -277,7 +282,7 @@
     el.qFeedback.hidden = false;
     el.qFeedback.className = "quiz-feedback " + (isCorrect ? "ok" : "no");
     el.qFeedback.innerHTML =
-      "<strong>" + (isCorrect ? "✓ Correct" : "✗ Correct answer: " + escapeHtml(q.options[q.answer])) + "</strong>" +
+      "<strong>" + (isCorrect ? "✓ Correct — well done!" : "✗ Correct answer: " + escapeHtml(q.options[q.answer])) + "</strong>" +
       (q.explanation ? "<span>" + escapeHtml(q.explanation) + "</span>" : "");
 
     const nextBtn = document.createElement("button");
@@ -289,8 +294,29 @@
     nextBtn.textContent = isLast ? "See my level →" : "Next question →";
     nextBtn.addEventListener("click", advance);
     el.qFeedback.appendChild(nextBtn);
+
+    // ====== AUTO SCROLL: feedback + next button ko screen pe le aao ======
+    requestAnimationFrame(function(){
+      setTimeout(function(){
+        const rect = el.qFeedback.getBoundingClientRect();
+        const header = document.querySelector('header');
+        const headerH = header ? header.offsetHeight : 72;
+        const viewportBottom = window.innerHeight - 20;
+
+        // Agar next button viewport ke bahar hai, sirf utna scroll karo jitna zaroori hai
+        if (rect.bottom > viewportBottom) {
+          const scrollBy = rect.bottom - viewportBottom + 16;
+          try {
+            window.scrollBy({ top: scrollBy, behavior: "smooth" });
+          } catch(e) {
+            window.scrollBy(0, scrollBy);
+          }
+        }
+      }, 60);
+    });
+
     nextBtn.focus({ preventScroll: true });
-  }
+}
 
   /* ============ ADVANCE ============ */
   function advance() {
