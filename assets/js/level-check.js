@@ -367,7 +367,15 @@ function showResult() {
         el.qOptions.innerHTML = "";
         el.qFeedback.hidden = true;
         el.progressFill.style.width = "0%";
-        window.scrollTo({ top: el.quizRoot.offsetTop - 100, behavior: "smooth" });
+        (function(){
+  const header = document.querySelector('header');
+  const headerH = header ? header.offsetHeight : 72;
+  const y = el.quizRoot.getBoundingClientRect().top
+          + (window.pageYOffset || document.documentElement.scrollTop)
+          - headerH - 20;
+  try { window.scrollTo({ top: Math.max(y, 0), behavior: "smooth" }); }
+  catch(e){ window.scrollTo(0, Math.max(y, 0)); }
+})();
 
         setTimeout(function () {
           try {
