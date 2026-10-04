@@ -126,8 +126,7 @@
     if (el.chooseCourse) el.chooseCourse.hidden = true;
     if (el.quizRoot) el.quizRoot.hidden = true;
     if (el.resultRoot) el.resultRoot.hidden = false;
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+    if (el.resultRoot) window.scrollTo({ top: Math.max(el.resultRoot.offsetTop - 100, 0), behavior: "smooth" });  }
 
   /* ============ START COURSE ============ */
   async function startCourse(courseKey) {
