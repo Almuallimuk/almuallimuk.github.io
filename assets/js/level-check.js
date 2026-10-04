@@ -169,7 +169,19 @@ function showResult() {
     el.qTotal.textContent = CONFIG.QUESTIONS_PER_STAGE;
     el.progressFill.style.width = "0%";
 
-    window.scrollTo({ top: el.quizRoot.offsetTop - 100, behavior: "smooth" });
+    // Delay scroll till layout is ready — use getBoundingClientRect for accuracy
+requestAnimationFrame(function(){
+  setTimeout(function(){
+    if (!el.quizRoot) return;
+    const header = document.querySelector('header');
+    const headerH = header ? header.offsetHeight : 72;
+    const y = el.quizRoot.getBoundingClientRect().top
+            + (window.pageYOffset || document.documentElement.scrollTop)
+            - headerH - 16;
+    try { window.scrollTo({ top: Math.max(y, 0), behavior: "smooth" }); }
+    catch(e){ window.scrollTo(0, Math.max(y, 0)); }
+  }, 100);
+});
 
     try {
       const res = await fetch(CONFIG.DATA[courseKey]);
