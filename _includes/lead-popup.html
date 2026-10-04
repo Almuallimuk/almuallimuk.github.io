@@ -59,6 +59,8 @@
 
 <script>
 (function(){
+    var ENABLE_LEAD_POPUP = false; // Popup band karne ke liye false, chalu karne ke liye true
+  if (!ENABLE_LEAD_POPUP) return; // Ye line poore popup function ko rok degi
   var popup = document.getElementById('leadPopup');
   if (!popup) return;
 
