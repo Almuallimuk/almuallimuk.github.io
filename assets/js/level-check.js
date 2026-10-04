@@ -319,12 +319,28 @@
 }
 
   /* ============ ADVANCE ============ */
-  function advance() {
+ function advance() {
     if (state.isTransitioning) return;
 
     if (state.qIndex < state.questions.length - 1) {
       state.qIndex++;
       renderQuestion();
+
+      // ====== Naya question aane pe card ke top pe scroll karo ======
+      requestAnimationFrame(function(){
+        setTimeout(function(){
+          const card = document.querySelector('.quiz-card');
+          if (!card) return;
+          const header = document.querySelector('header');
+          const headerH = header ? header.offsetHeight : 72;
+          const y = card.getBoundingClientRect().top
+                  + (window.pageYOffset || document.documentElement.scrollTop)
+                  - headerH - 20;
+          try { window.scrollTo({ top: Math.max(y, 0), behavior: "smooth" }); }
+          catch(e){ window.scrollTo(0, Math.max(y, 0)); }
+        }, 50);
+      });
+
       return;
     }
 
