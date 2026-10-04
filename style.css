@@ -1107,3 +1107,380 @@ footer a:hover{opacity:1;color:var(--gold-bright)}
     transition:none !important;
   }
 }
+/* =========================================================
+   V5 FINAL — Topic pill (dark green), Compact quiz, Redesign
+   ========================================================= */
+
+/* ========== 1. TOPIC PILL — DARK GREEN (aapki #1 requirement) ========== */
+.quiz-topic,
+#qTopic,
+.quiz-card .quiz-topic{
+  display:inline-block !important;
+  background-color:#0A2A1F !important;
+  background-image:linear-gradient(135deg, #0A2A1F 0%, #123F2D 100%) !important;
+  color:#EEDFB8 !important;
+  font-size:.72rem !important;
+  font-weight:700 !important;
+  letter-spacing:.10em !important;
+  text-transform:uppercase !important;
+  padding:8px 16px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(199,161,92,.5) !important;
+  margin-bottom:14px !important;
+  box-shadow:0 4px 12px rgba(10,42,31,.28), inset 0 1px 0 rgba(221,184,107,.25) !important;
+  position:relative !important;
+  overflow:hidden !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.3) !important;
+}
+
+/* ========== 2. QUIZ COMPACT — screen se bahar nahi jayega ========== */
+
+/* Page wrapper */
+.quiz-wrap{
+  padding:18px 0 40px !important;
+  min-height:auto !important;
+}
+
+/* Top bar — chhota */
+.quiz-top{
+  margin-bottom:14px !important;
+}
+.quiz-exit{
+  padding:6px 12px !important;
+  font-size:.78rem !important;
+}
+.quiz-course-name{
+  font-size:.95rem !important;
+}
+
+/* Progress bar — patla */
+.quiz-progress{
+  margin-bottom:16px !important;
+}
+.quiz-progress-label{
+  margin-top:6px !important;
+  font-size:.72rem !important;
+}
+
+/* CARD — sab kuch fit ho jaye */
+.quiz-card{
+  background:#fff !important;
+  border:1px solid rgba(199,161,92,.4) !important;
+  border-radius:16px !important;
+  padding:22px 24px 20px !important;
+  max-width:720px !important;
+  margin:0 auto !important;
+  position:relative !important;
+  overflow:hidden !important;
+  box-shadow:0 16px 40px rgba(10,42,31,.09), 0 2px 6px rgba(10,42,31,.04) !important;
+  animation:cardIn .45s cubic-bezier(.34,1.4,.64,1) !important;
+}
+@media(min-width:700px){
+  .quiz-card{padding:26px 32px 24px !important}
+}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(14px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+/* Soft golden glow — subtler */
+.quiz-card::before{
+  content:"";
+  position:absolute;
+  top:-35%;right:-20%;
+  width:260px;height:260px;
+  background:radial-gradient(circle, rgba(199,161,92,.16), transparent 70%);
+  pointer-events:none;
+  animation:cardGlow 12s ease-in-out infinite;
+}
+@keyframes cardGlow{
+  0%,100%{transform:translate(0,0) scale(1);opacity:.65}
+  50%{transform:translate(-16px,16px) scale(1.12);opacity:1}
+}
+
+/* Question — chhota, ek line */
+.quiz-question{
+  color:#0A2A1F !important;
+  font-size:clamp(1.05rem, 2.6vw, 1.25rem) !important;
+  line-height:1.35 !important;
+  margin-bottom:16px !important;
+  font-family:'Cormorant Garamond',serif !important;
+  font-weight:600 !important;
+  position:relative;
+  z-index:1;
+}
+
+/* Options — chhote, compact */
+.quiz-options{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:8px !important;
+  position:relative;
+  z-index:1;
+}
+.quiz-option{
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  background:#fff !important;
+  border:1.5px solid #EDE6D2 !important;
+  border-radius:11px !important;
+  padding:11px 14px !important;
+  cursor:pointer !important;
+  text-align:left !important;
+  font-family:inherit !important;
+  font-size:.94rem !important;
+  color:#1C2620 !important;
+  transition:all .22s ease !important;
+  width:100% !important;
+  min-height:46px !important;
+  line-height:1.35 !important;
+}
+.quiz-option:hover:not([disabled]){
+  border-color:#C7A15C !important;
+  background:linear-gradient(135deg, #FFFFFF, #FBF5E5) !important;
+  transform:translateY(-1px) !important;
+  box-shadow:0 6px 16px rgba(199,161,92,.18) !important;
+}
+.quiz-option[disabled]{cursor:not-allowed !important}
+
+.quiz-option .opt-letter{
+  flex:none !important;
+  width:28px !important;
+  height:28px !important;
+  border-radius:50% !important;
+  background:linear-gradient(140deg, #0A2A1F, #123F2D) !important;
+  color:#DDB86B !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-weight:700 !important;
+  font-size:.76rem !important;
+  font-family:'Inter',sans-serif !important;
+  box-shadow:0 2px 6px rgba(10,42,31,.2) !important;
+  transition:all .2s ease !important;
+}
+.quiz-option.correct{
+  border-color:#2E7D54 !important;
+  background:linear-gradient(135deg, #E8F5E9, #C8E6C9) !important;
+  animation:correctPulse .7s ease !important;
+}
+.quiz-option.correct .opt-letter{
+  background:#2E7D54 !important;color:#fff !important;
+  transform:scale(1.08) !important;
+}
+.quiz-option.wrong{
+  border-color:#C77A5C !important;
+  background:linear-gradient(135deg, #FFEBEE, #FFCDD2) !important;
+  animation:wrongShake .42s ease !important;
+}
+.quiz-option.wrong .opt-letter{
+  background:#C77A5C !important;color:#fff !important;
+}
+@keyframes correctPulse{
+  0%{box-shadow:0 0 0 0 rgba(46,125,84,.5)}
+  70%{box-shadow:0 0 0 14px rgba(46,125,84,0)}
+  100%{box-shadow:0 0 0 0 rgba(46,125,84,0)}
+}
+@keyframes wrongShake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  75%{transform:translateX(6px)}
+}
+
+/* Feedback — compact */
+.quiz-feedback{
+  margin-top:14px !important;
+  padding:12px 16px !important;
+  border-radius:11px !important;
+  font-size:.88rem !important;
+  line-height:1.5 !important;
+  animation:fadeInUp .35s ease !important;
+  position:relative;
+  z-index:1;
+}
+.quiz-feedback.ok{
+  background:linear-gradient(135deg, rgba(46,125,84,.14), rgba(46,125,84,.05)) !important;
+  border-left:3px solid #2E7D54 !important;
+  color:#0A2A1F !important;
+}
+.quiz-feedback.no{
+  background:linear-gradient(135deg, rgba(199,90,60,.12), rgba(199,90,60,.03)) !important;
+  border-left:3px solid #C77A5C !important;
+  color:#7A3822 !important;
+}
+.quiz-feedback strong{
+  display:block !important;
+  margin-bottom:4px !important;
+  font-weight:600 !important;
+  font-size:.92rem !important;
+}
+.quiz-feedback .btn{
+  margin-top:12px !important;
+  width:100% !important;
+  padding:11px 18px !important;
+  font-size:.9rem !important;
+  font-weight:600 !important;
+  border-radius:10px !important;
+  box-shadow:0 6px 16px rgba(10,42,31,.16) !important;
+}
+.quiz-feedback .btn:hover{
+  transform:translateY(-1px) !important;
+  box-shadow:0 10px 22px rgba(199,161,92,.3) !important;
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Progress bar — gradient */
+.quiz-progress-fill{
+  background:linear-gradient(90deg, #0A2A1F 0%, #2E7D54 50%, #C7A15C 100%) !important;
+  box-shadow:0 0 10px rgba(199,161,92,.45) !important;
+  transition:width .45s cubic-bezier(.4,.2,.2,1) !important;
+}
+.quiz-progress-track{
+  height:5px !important;
+}
+
+/* ========== 3. PAGE REDESIGN — interesting + user friendly ========== */
+
+/* Hero — bold, focused */
+.hero-centered{
+  padding:40px 0 30px !important;
+}
+.hero-centered h1{
+  font-size:clamp(1.7rem, 4.5vw, 2.6rem) !important;
+  line-height:1.15 !important;
+  margin-bottom:14px !important;
+  letter-spacing:-.01em;
+}
+.hero-centered .lede{
+  font-size:1rem !important;
+  line-height:1.65 !important;
+  max-width:60ch !important;
+}
+
+/* Trust row — pills */
+.trust-row{
+  gap:14px !important;
+  margin-top:26px !important;
+  padding-top:18px !important;
+  justify-content:center !important;
+  flex-wrap:wrap !important;
+}
+.trust-row > div{
+  background:#fff;
+  border:1px solid rgba(199,161,92,.35);
+  border-radius:10px;
+  padding:10px 16px;
+  font-size:.75rem !important;
+  text-align:center;
+  min-width:100px;
+  transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.trust-row > div:hover{
+  transform:translateY(-3px);
+  border-color:#C7A15C;
+  box-shadow:0 10px 22px rgba(10,42,31,.08);
+}
+.trust-row strong{
+  font-size:1.35rem !important;
+  display:block !important;
+  margin-bottom:2px !important;
+  color:#0A2A1F !important;
+}
+
+/* Course pick cards — attractive */
+.feature.pick-card{
+  position:relative !important;
+  background:linear-gradient(160deg, #FFFFFF 0%, #FBF7EC 100%) !important;
+  border:2px solid rgba(199,161,92,.35) !important;
+  border-radius:16px !important;
+  padding:26px 24px 22px !important;
+  overflow:hidden !important;
+  transition:all .3s cubic-bezier(.34,1.4,.64,1) !important;
+  box-shadow:0 4px 16px rgba(10,42,31,.05) !important;
+  text-decoration:none;
+}
+.feature.pick-card::before{
+  content:"";
+  position:absolute;
+  top:-45%;right:-30%;
+  width:240px;height:240px;
+  background:radial-gradient(circle, rgba(199,161,92,.16), transparent 70%);
+  pointer-events:none;
+  opacity:.6;
+  transition:opacity .3s ease, transform .4s ease;
+}
+.feature.pick-card:hover,
+.feature.pick-card:focus-visible{
+  border-color:#C7A15C !important;
+  transform:translateY(-5px) !important;
+  box-shadow:0 20px 44px rgba(10,42,31,.13) !important;
+  outline:none !important;
+}
+.feature.pick-card:hover::before{opacity:1;transform:scale(1.1)}
+.feature.pick-card .pick-eyebrow{
+  color:#C7A15C !important;
+  font-size:1.1rem !important;
+  font-family:'Amiri',serif !important;
+  display:block !important;
+  margin-bottom:6px !important;
+}
+.feature.pick-card h3{
+  font-size:1.3rem !important;
+  margin-bottom:8px !important;
+  color:#0A2A1F !important;
+  font-weight:600;
+}
+.feature.pick-card p{
+  color:#4A564E !important;
+  font-size:.92rem !important;
+  line-height:1.55 !important;
+  margin-bottom:14px !important;
+}
+.feature.pick-card .pick-meta{
+  border-top:1px solid rgba(199,161,92,.35) !important;
+  padding-top:12px !important;
+  margin-top:12px !important;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  font-size:.74rem !important;
+  color:#4A564E !important;
+  letter-spacing:.05em !important;
+  text-transform:uppercase !important;
+  font-weight:700 !important;
+}
+.feature.pick-card .pick-arrow{
+  color:#C7A15C !important;
+  font-size:1.1rem !important;
+  transition:transform .25s ease !important;
+}
+.feature.pick-card:hover .pick-arrow{
+  transform:translateX(6px) !important;
+}
+
+/* Why cards — number badges better */
+.feature .why-num{
+  background:linear-gradient(140deg, #0A2A1F, #123F2D) !important;
+  color:#DDB86B !important;
+  box-shadow:0 4px 12px rgba(10,42,31,.2) !important;
+}
+
+/* Section heading Arabic — bigger, gold */
+.section-head .arabic,
+#choose-course .section-head-center .arabic{
+  font-size:1.3rem !important;
+  color:#C7A15C !important;
+  display:block !important;
+  margin-bottom:10px !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .quiz-card, .quiz-card::before, .quiz-option, .quiz-feedback, .feature.pick-card::before{
+    animation:none !important;
+    transition:none !important;
+  }
+}
