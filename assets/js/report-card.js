@@ -107,10 +107,18 @@
     // make sure Arabic font is ready before drawing, otherwise letters fall back to a plain font
     try { await document.fonts.load('34px "Amiri"', "وَ"); await document.fonts.ready; } catch (e) {}
 
+    // Blank-PDF fix: the page must be scrolled to the top while we capture
+    var oldX = window.scrollX, oldY = window.scrollY;
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     var host = document.createElement("div");
-    host.style.cssText = "position:fixed;top:0;left:0;z-index:-1;background:#fff;";
+    host.style.cssText = "position:absolute;top:0;left:0;width:794px;z-index:-1;background:#fff;";
     host.innerHTML = buildHtml(result);
     document.body.appendChild(host);
+    var page = host.firstChild;
+
+    // give the browser a moment to lay the report out before capturing
+    await new Promise(function (res) { setTimeout(res, 300); });
 
     try {
       await html2pdf()
@@ -118,13 +126,27 @@
           margin: 0,
           filename: "Almuallim-Report-Card.pdf",
           image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
-          jsPDF: { unit: "px", format: [794, 1123], orientation: "portrait", hotfixes: ["px_scaling"] },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: "#ffffff",
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: 794,
+            width: 794,
+            height: page.offsetHeight,
+          },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+          pagebreak: { mode: ["avoid-all"] },
         })
-        .from(host.firstChild)
+        .from(page)
         .save();
+    } catch (err) {
+      console.error("[ReportCard] PDF error:", err);
+      throw err;
     } finally {
       document.body.removeChild(host);
+      window.scrollTo({ top: oldY, left: oldX, behavior: "instant" });
     }
   };
 })();
