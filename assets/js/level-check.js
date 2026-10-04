@@ -1,5 +1,7 @@
 /* =========================================================
-   ALMUALLIM — FREE LEVEL CHECK ENGINE (v2 — fixed)
+   ALMUALLIM — FREE LEVEL CHECK ENGINE (v3)
+   - result shows in place (no jump to top)
+   - report card asks name + email, sends to Brevo, then downloads PDF
    ========================================================= */
 (function () {
   "use strict";
@@ -11,8 +13,8 @@
     STAGE1_BORDERLINE: 3,
     STAGE1_ADVANCE_MIN: 4,
     STAGE2_ADVANCED_MIN: 4,
+    BREVO_URL: "https://c616f6f2.sibforms.com/serve/MUIFAO4LXPaN1j1KNEvhywbd32fEe81cXMWnr5H-n7rLWzC7eQRAiIWeCyEOjXDtDqFRFwqzjpQ6vQVGbb1mMMPLOy4tOr_A9NKDfFhKfUbx29xQvK9QdFxV6yNOqpXHNZcaJIypYJ5SEO63GkNM4zuQVWZ9feIa3Sko5rRSrsvZ1a9uHfzVXsA57WWfUK-g66NOT1LfifMULHViuA==",
     DATA: {
-      // Yahan jsDelivr CDN ke links laga diye hain
       quran: "https://cdn.jsdelivr.net/gh/Almuallimuk/almuallimuk.github.io@main/assets/data/questions-quran.json",
       islam: "https://cdn.jsdelivr.net/gh/Almuallimuk/almuallimuk.github.io@main/assets/data/questions-islam.json"
     },
@@ -79,7 +81,7 @@
   function pickQuestions(pool, n) {
     if (!Array.isArray(pool) || !pool.length) return [];
     const byLesson = {};
-    pool.forEach(function(q) {
+    pool.forEach(function (q) {
       if (!byLesson[q.lesson]) byLesson[q.lesson] = [];
       byLesson[q.lesson].push(q);
     });
@@ -90,8 +92,8 @@
       picked.push(bag[0]);
     }
     if (picked.length < n) {
-      const usedIds = new Set(picked.map(function(p) { return p.id; }));
-      const remaining = shuffle(pool.filter(function(q) { return !usedIds.has(q.id); }));
+      const usedIds = new Set(picked.map(function (p) { return p.id; }));
+      const remaining = shuffle(pool.filter(function (q) { return !usedIds.has(q.id); }));
       while (picked.length < n && remaining.length) {
         picked.push(remaining.shift());
       }
@@ -126,7 +128,11 @@
     if (el.chooseCourse) el.chooseCourse.hidden = true;
     if (el.quizRoot) el.quizRoot.hidden = true;
     if (el.resultRoot) el.resultRoot.hidden = false;
-    if (el.resultRoot) window.scrollTo({ top: Math.max(el.resultRoot.offsetTop - 100, 0), behavior: "smooth" });  }
+    // keep the user where the quiz was: scroll to the result block, not the page top
+    if (el.resultRoot) {
+      window.scrollTo({ top: Math.max(el.resultRoot.offsetTop - 100, 0), behavior: "smooth" });
+    }
+  }
 
   /* ============ START COURSE ============ */
   async function startCourse(courseKey) {
@@ -156,7 +162,6 @@
     window.scrollTo({ top: el.quizRoot.offsetTop - 100, behavior: "smooth" });
 
     try {
-      // Yahan cache force-cache hata diya hai taake fresh data load ho
       const res = await fetch(CONFIG.DATA[courseKey]);
       if (!res.ok) throw new Error("HTTP " + res.status);
       const data = await res.json();
@@ -185,7 +190,7 @@
     state.qIndex = 0;
     state.answers = [];
 
-    const pool = state.bank.filter(function(q) { return q.stage === stage; });
+    const pool = state.bank.filter(function (q) { return q.stage === stage; });
     console.log("[LevelCheck] Stage " + stage + " — " + pool.length + " questions in pool");
 
     state.questions = pickQuestions(pool, CONFIG.QUESTIONS_PER_STAGE);
@@ -219,7 +224,7 @@
 
     el.qOptions.innerHTML = "";
     const letters = ["A", "B", "C", "D"];
-    q.options.forEach(function(opt, i) {
+    q.options.forEach(function (opt, i) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "quiz-option";
@@ -228,7 +233,7 @@
       btn.innerHTML =
         '<span class="opt-letter">' + letters[i] + '</span>' +
         '<span>' + escapeHtml(opt) + '</span>';
-      btn.addEventListener("click", function() { selectAnswer(i); });
+      btn.addEventListener("click", function () { selectAnswer(i); });
       el.qOptions.appendChild(btn);
     });
 
@@ -250,7 +255,7 @@
     const isCorrect = chosenIdx === q.answer;
 
     const allBtns = el.qOptions.querySelectorAll(".quiz-option");
-    allBtns.forEach(function(btn, i) {
+    allBtns.forEach(function (btn, i) {
       btn.disabled = true;
       if (i === q.answer) {
         btn.style.borderColor = "var(--green-light)";
@@ -298,7 +303,7 @@
     }
 
     // Stage complete
-    const score = state.answers.filter(function(a) { return a.correct; }).length;
+    const score = state.answers.filter(function (a) { return a.correct; }).length;
     console.log("[LevelCheck] Stage " + state.stage + " done — score: " + score);
 
     if (state.stage === 1) {
@@ -312,7 +317,7 @@
         el.progressFill.style.width = "0%";
         window.scrollTo({ top: el.quizRoot.offsetTop - 100, behavior: "smooth" });
 
-        setTimeout(function() {
+        setTimeout(function () {
           try {
             beginStage(2);
           } catch (err) {
@@ -332,6 +337,114 @@
     }
   }
 
+  /* ============ REPORT CARD: ASK EMAIL → BREVO → PDF ============ */
+  function openReportModal(info) {
+    if (document.getElementById("rcModal")) return;
+
+    if (!document.getElementById("rcModalStyle")) {
+      const st = document.createElement("style");
+      st.id = "rcModalStyle";
+      st.textContent =
+        ".rc-overlay{position:fixed;inset:0;background:rgba(10,42,31,.6);display:flex;align-items:center;justify-content:center;z-index:99999;padding:16px}" +
+        ".rc-box{background:#fff;border-radius:14px;max-width:440px;width:100%;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.3);max-height:90vh;overflow:auto}" +
+        ".rc-box h3{margin:0 0 6px;font-size:1.25rem;color:#0A2A1F}" +
+        ".rc-box p{margin:0 0 14px;color:#4b5b54;font-size:.95rem}" +
+        ".rc-l{display:block;font-weight:600;font-size:.9rem;margin:10px 0 4px}" +
+        ".rc-box input[type=text],.rc-box input[type=email]{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #c9c2ad;border-radius:8px;font-size:1rem}" +
+        ".rc-consent{display:flex;gap:8px;align-items:flex-start;font-size:.85rem;margin:14px 0;color:#4b5b54}" +
+        ".rc-consent input{margin-top:3px}" +
+        ".rc-err{color:#B3261E;font-size:.9rem;min-height:1.2em;margin:6px 0}" +
+        ".rc-actions{display:flex;gap:10px;flex-wrap:wrap}";
+      document.head.appendChild(st);
+    }
+
+    const wrap = document.createElement("div");
+    wrap.id = "rcModal";
+    wrap.className = "rc-overlay";
+    wrap.innerHTML =
+      '<div class="rc-box" role="dialog" aria-modal="true" aria-labelledby="rcTitle">' +
+        '<h3 id="rcTitle">Get your report card</h3>' +
+        '<p>Enter your details and your personalised PDF will download straight away.</p>' +
+        '<label class="rc-l" for="rcName">First name</label>' +
+        '<input type="text" id="rcName" maxlength="60" autocomplete="given-name">' +
+        '<label class="rc-l" for="rcEmail">Email address</label>' +
+        '<input type="email" id="rcEmail" maxlength="120" autocomplete="email">' +
+        '<label class="rc-consent" for="rcConsent">' +
+          '<input type="checkbox" id="rcConsent">' +
+          '<span>I agree to receive my results and occasional Qur\'an learning tips from Almuallim by email. I can unsubscribe at any time. See our <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span>' +
+        '</label>' +
+        '<div class="rc-err" id="rcError" role="alert"></div>' +
+        '<div class="rc-actions">' +
+          '<button type="button" class="btn" id="rcSubmit">Download my report card</button>' +
+          '<button type="button" class="btn btn-outline" id="rcCancel">Cancel</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(wrap);
+
+    const nameIn = document.getElementById("rcName");
+    const emailIn = document.getElementById("rcEmail");
+    const consentIn = document.getElementById("rcConsent");
+    const errBox = document.getElementById("rcError");
+    const submitBtn = document.getElementById("rcSubmit");
+    nameIn.focus();
+
+    function closeModal() { if (wrap.parentNode) wrap.parentNode.removeChild(wrap); }
+    document.getElementById("rcCancel").addEventListener("click", closeModal);
+    wrap.addEventListener("click", function (e) { if (e.target === wrap) closeModal(); });
+
+    submitBtn.addEventListener("click", async function () {
+      const name = nameIn.value.trim();
+      const email = emailIn.value.trim();
+      errBox.textContent = "";
+
+      if (!name) { errBox.textContent = "Please enter your first name."; nameIn.focus(); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errBox.textContent = "Please enter a valid email address."; emailIn.focus(); return; }
+      if (!consentIn.checked) { errBox.textContent = "Please tick the box to continue."; return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Preparing your PDF…";
+
+      // 1) Send to Brevo (the PDF is still given if this fails)
+      try {
+        const body = new URLSearchParams();
+        body.append("FIRSTNAME", name);
+        body.append("EMAIL", email);
+        body.append("COURSE", info.courseName);
+        body.append("LEVEL", info.levelLabel);
+        body.append("WEAK_AREAS", info.weak.length ? info.weak.join(", ").slice(0, 200) : "None");
+        body.append("email_address_check", "");
+        body.append("locale", "en");
+        await fetch(CONFIG.BREVO_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: body
+        });
+      } catch (err) {
+        console.warn("[LevelCheck] Brevo send failed:", err);
+      }
+
+      // 2) Make the PDF
+      try {
+        await window.downloadReportCard({
+          course: info.courseKey,
+          name: name,
+          level: info.levelLabel + " level",
+          score: info.score,
+          total: info.total,
+          recommendedLesson: info.startLesson,
+          weakAreas: info.weak.slice(0, 3)
+        });
+        closeModal();
+      } catch (err) {
+        console.error("[LevelCheck] PDF error:", err);
+        errBox.textContent = "Sorry, we could not create the PDF. Please try again.";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Download my report card";
+      }
+    });
+  }
+
   /* ============ RENDER RESULT ============ */
   function renderResult(level, score, total, stage1Score) {
     const course = CONFIG.COURSES[state.course];
@@ -339,13 +452,13 @@
 
     const wrongTopics = [];
     const rightTopics = [];
-    state.answers.forEach(function(a) {
+    state.answers.forEach(function (a) {
       const tag = a.lesson + " " + a.topic;
       if (a.correct) rightTopics.push(tag);
       else wrongTopics.push(tag);
     });
     const weak = Array.from(new Set(wrongTopics));
-    const strong = Array.from(new Set(rightTopics)).filter(function(t) { return weak.indexOf(t) === -1; });
+    const strong = Array.from(new Set(rightTopics)).filter(function (t) { return weak.indexOf(t) === -1; });
 
     const scoreLine = stage1Score !== null
       ? "Stage 1: " + stage1Score + "/5 · Stage 2: " + score + "/" + total
@@ -374,7 +487,7 @@
       html +=   '<div class="result-card" style="border-left:3px solid #C77A5C">';
       html +=     '<h3>Revise before you start</h3>';
       html +=     '<ul class="result-weak-list">';
-      weak.forEach(function(t) { html += '<li>' + escapeHtml(t) + '</li>'; });
+      weak.forEach(function (t) { html += '<li>' + escapeHtml(t) + '</li>'; });
       html +=     '</ul>';
       html +=   '</div>';
     }
@@ -383,7 +496,7 @@
       html +=   '<div class="result-card" style="border-left:3px solid var(--green-light)">';
       html +=     '<h3>You already know</h3>';
       html +=     '<ul class="result-strong-list">';
-      strong.forEach(function(t) { html += '<li>' + escapeHtml(t) + '</li>'; });
+      strong.forEach(function (t) { html += '<li>' + escapeHtml(t) + '</li>'; });
       html +=     '</ul>';
       html +=   '</div>';
     }
@@ -406,118 +519,20 @@
     el.resultInner.innerHTML = html;
 
     const takeOther = document.getElementById("takeOther");
-    if (takeOther) takeOther.addEventListener("click", function() { startCourse(otherCourse); });
+    if (takeOther) takeOther.addEventListener("click", function () { startCourse(otherCourse); });
 
     const retake = document.getElementById("retakeTest");
-    if (retake) retake.addEventListener("click", function() { startCourse(state.course); });
+    if (retake) retake.addEventListener("click", function () { startCourse(state.course); });
 
-       const openReportModal = function () {
-      if (document.getElementById("rcModal")) return;
-
-      const BREVO_URL = "https://c616f6f2.sibforms.com/serve/MUIFAO4LXPaN1j1KNEvhywbd32fEe81cXMWnr5H-n7rLWzC7eQRAiIWeCyEOjXDtDqFRFwqzjpQ6vQVGbb1mMMPLOy4tOr_A9NKDfFhKfUbx29xQvK9QdFxV6yNOqpXHNZcaJIypYJ5SEO63GkNM4zuQVWZ9feIa3Sko5rRSrsvZ1a9uHfzVXsA57WWfUK-g66NOT1LfifMULHViuA==";
-
-      if (!document.getElementById("rcModalStyle")) {
-        const st = document.createElement("style");
-        st.id = "rcModalStyle";
-        st.textContent =
-          ".rc-overlay{position:fixed;inset:0;background:rgba(10,42,31,.6);display:flex;align-items:center;justify-content:center;z-index:99999;padding:16px}" +
-          ".rc-box{background:#fff;border-radius:14px;max-width:440px;width:100%;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.3);max-height:90vh;overflow:auto}" +
-          ".rc-box h3{margin:0 0 6px;font-size:1.25rem;color:#0A2A1F}" +
-          ".rc-box p{margin:0 0 14px;color:#4b5b54;font-size:.95rem}" +
-          ".rc-l{display:block;font-weight:600;font-size:.9rem;margin:10px 0 4px}" +
-          ".rc-box input[type=text],.rc-box input[type=email]{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #c9c2ad;border-radius:8px;font-size:1rem}" +
-          ".rc-consent{display:flex;gap:8px;align-items:flex-start;font-size:.85rem;margin:14px 0;color:#4b5b54}" +
-          ".rc-consent input{margin-top:3px}" +
-          ".rc-err{color:#B3261E;font-size:.9rem;min-height:1.2em;margin:6px 0}" +
-          ".rc-actions{display:flex;gap:10px;flex-wrap:wrap}";
-        document.head.appendChild(st);
-      }
-
-      const wrap = document.createElement("div");
-      wrap.id = "rcModal";
-      wrap.className = "rc-overlay";
-      wrap.innerHTML =
-        '<div class="rc-box" role="dialog" aria-modal="true" aria-labelledby="rcTitle">' +
-          '<h3 id="rcTitle">Get your report card</h3>' +
-          '<p>Enter your details and your personalised PDF will download straight away.</p>' +
-          '<label class="rc-l" for="rcName">First name</label>' +
-          '<input type="text" id="rcName" maxlength="60" autocomplete="given-name">' +
-          '<label class="rc-l" for="rcEmail">Email address</label>' +
-          '<input type="email" id="rcEmail" maxlength="120" autocomplete="email">' +
-          '<label class="rc-consent" for="rcConsent">' +
-            '<input type="checkbox" id="rcConsent">' +
-            '<span>I agree to receive my results and occasional Qur\'an learning tips from Almuallim by email. I can unsubscribe at any time. See our <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span>' +
-          '</label>' +
-          '<div class="rc-err" id="rcError" role="alert"></div>' +
-          '<div class="rc-actions">' +
-            '<button type="button" class="btn" id="rcSubmit">Download my report card</button>' +
-            '<button type="button" class="btn btn-outline" id="rcCancel">Cancel</button>' +
-          '</div>' +
-        '</div>';
-      document.body.appendChild(wrap);
-
-      const nameIn = document.getElementById("rcName");
-      const emailIn = document.getElementById("rcEmail");
-      const consentIn = document.getElementById("rcConsent");
-      const errBox = document.getElementById("rcError");
-      const submitBtn = document.getElementById("rcSubmit");
-      nameIn.focus();
-
-      function closeModal() { if (wrap.parentNode) wrap.parentNode.removeChild(wrap); }
-      document.getElementById("rcCancel").addEventListener("click", closeModal);
-      wrap.addEventListener("click", function (e) { if (e.target === wrap) closeModal(); });
-
-      submitBtn.addEventListener("click", async function () {
-        const name = nameIn.value.trim();
-        const email = emailIn.value.trim();
-        errBox.textContent = "";
-
-        if (!name) { errBox.textContent = "Please enter your first name."; nameIn.focus(); return; }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errBox.textContent = "Please enter a valid email address."; emailIn.focus(); return; }
-        if (!consentIn.checked) { errBox.textContent = "Please tick the box to continue."; return; }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Preparing your PDF…";
-
-        // 1) Send to Brevo (PDF is given even if this fails)
-        try {
-          const body = new URLSearchParams();
-          body.append("FIRSTNAME", name);
-          body.append("EMAIL", email);
-          body.append("COURSE", course.name);
-          body.append("LEVEL", levelMeta.label);
-          body.append("WEAK_AREAS", weak.length ? weak.join(", ").slice(0, 200) : "None");
-          body.append("email_address_check", "");
-          body.append("locale", "en");
-          await fetch(BREVO_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: body
-          });
-        } catch (err) {
-          console.warn("[LevelCheck] Brevo send failed:", err);
-        }
-
-        // 2) Make the PDF
-        try {
-          await window.downloadReportCard({
-            course: state.course,
-            name: name,
-            level: levelMeta.label + " level",
-            score: (stage1Score !== null ? stage1Score : 0) + score,
-            total: (stage1Score !== null ? 5 : 0) + total,
-            recommendedLesson: levelMeta.startLesson,
-            weakAreas: weak.slice(0, 3)
-          });
-          closeModal();
-        } catch (err) {
-          console.error("[LevelCheck] PDF error:", err);
-          errBox.textContent = "Sorry, we could not create the PDF. Please try again.";
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Download my report card";
-        }
-      });
+    // Everything the report card needs, captured now
+    const reportInfo = {
+      courseKey: state.course,
+      courseName: course.name,
+      levelLabel: levelMeta.label,
+      startLesson: levelMeta.startLesson,
+      weak: weak,
+      score: (stage1Score !== null ? stage1Score : 0) + score,
+      total: (stage1Score !== null ? 5 : 0) + total
     };
 
     const getReport = document.getElementById("getReport");
@@ -526,13 +541,15 @@
         alert("PDF tool did not load. Please refresh the page and try again.");
         return;
       }
-      openReportModal();
+      openReportModal(reportInfo);
     });
+
+    showResult();
   }
 
   /* ============ WIRE UP ============ */
-  document.querySelectorAll("[data-course]").forEach(function(card) {
-    card.addEventListener("click", function(e) {
+  document.querySelectorAll("[data-course]").forEach(function (card) {
+    card.addEventListener("click", function (e) {
       e.preventDefault();
       const course = card.getAttribute("data-course");
       if (course) startCourse(course);
