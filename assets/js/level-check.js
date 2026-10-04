@@ -124,15 +124,25 @@
     if (el.chooseCourse) el.chooseCourse.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  function showResult() {
+function showResult() {
     if (el.chooseCourse) el.chooseCourse.hidden = true;
     if (el.quizRoot) el.quizRoot.hidden = true;
     if (el.resultRoot) el.resultRoot.hidden = false;
-    // keep the user where the quiz was: scroll to the result block, not the page top
-    if (el.resultRoot) {
-      window.scrollTo({ top: Math.max(el.resultRoot.offsetTop - 100, 0), behavior: "smooth" });
-    }
-  }
+
+    // Result block ke top pe scroll karo (header ka offset consider karke)
+    requestAnimationFrame(function(){
+      setTimeout(function(){
+        if (!el.resultRoot) return;
+        const header = document.querySelector('header');
+        const headerH = header ? header.offsetHeight : 72;
+        const y = el.resultRoot.getBoundingClientRect().top
+                + (window.pageYOffset || document.documentElement.scrollTop)
+                - headerH - 20;
+        try { window.scrollTo({ top: Math.max(y, 0), behavior: "smooth" }); }
+        catch(e){ window.scrollTo(0, Math.max(y, 0)); }
+      }, 80);
+    });
+}
 
   /* ============ START COURSE ============ */
   async function startCourse(courseKey) {
