@@ -413,8 +413,32 @@
     if (retake) retake.addEventListener("click", function() { startCourse(state.course); });
 
     const getReport = document.getElementById("getReport");
-    if (getReport) getReport.addEventListener("click", function() {
-      alert("Report card coming soon!");
+    if (getReport) getReport.addEventListener("click", async function() {
+      if (typeof window.downloadReportCard !== "function") {
+        alert("PDF tool did not load. Please refresh the page and try again.");
+        return;
+      }
+      const totalAll = (stage1Score !== null ? 5 : 0) + total;
+      const scoreAll = (stage1Score !== null ? stage1Score : 0) + score;
+      const oldText = getReport.textContent;
+      getReport.disabled = true;
+      getReport.textContent = "Preparing your PDF…";
+      try {
+        await window.downloadReportCard({
+          course: state.course,
+          name: "",
+          level: levelMeta.label + " level",
+          score: scoreAll,
+          total: totalAll,
+          recommendedLesson: levelMeta.startLesson,
+          weakAreas: weak.slice(0, 3)
+        });
+      } catch (err) {
+        console.error("[LevelCheck] PDF error:", err);
+        alert("Sorry, we could not create the PDF. Please try again.");
+      }
+      getReport.disabled = false;
+      getReport.textContent = oldText;
     });
 
     showResult();
